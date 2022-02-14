@@ -1,3 +1,3 @@
-FROM bitnami:openldap
-FROM ltbproject:self-service-password
-FROM ldapaccountmanager:lam
+FROM bitnami/openldap:latest
+FROM ltbproject/self-service-password:latest
+FROM ldapaccountmanager/lam:latest
