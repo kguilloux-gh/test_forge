@@ -7,9 +7,9 @@ job "ldap_forge" {
         
         restart {
             attempts = 3
-			      delay = "60s"
-			      interval = "1h"
-			      mode = "fail"
+	    delay = "60s"
+	    interval = "1h"
+	    mode = "fail"
         }
         update {
             max_parallel = 1
@@ -49,9 +49,9 @@ job "ldap_forge" {
         
         restart {
             attempts = 3
-			      delay = "60s"
-			      interval = "1h"
-			      mode = "fail"
+	    delay = "60s"
+	    interval = "1h"
+	    mode = "fail"
         }
         update {
             max_parallel = 1
