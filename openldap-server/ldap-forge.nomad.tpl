@@ -1,4 +1,4 @@
-job "ldap_forge" {
+job "ldap-forge" {
     datacenters = ["${datacenter}"]
 	type = "service"
 

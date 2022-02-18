@@ -1,4 +1,4 @@
-project = "forge/ldap"
+project = "forge/lam"
 
 labels = { "domaine" = "forge" }
 
@@ -7,7 +7,7 @@ runner {
     data_source "git" {
         url  = "https://github.com/kguilloux-gh/test_forge.git"
         ref  = "main"
-		path = "openldap-server"
+		path = "lam"
 		ignore_changes_outside_path = true
     }
 }
@@ -24,7 +24,7 @@ app "forge/ldap" {
   
     deploy{
         use "nomad-jobspec" {
-            jobspec = templatefile("${path.app}/ldap-forge.nomad.tpl", {
+            jobspec = templatefile("${path.app}/lam-forge.nomad.tpl", {
             image   = var.image
             tag     = var.tag
             datacenter = var.datacenter
@@ -35,12 +35,12 @@ app "forge/ldap" {
 
 variable "datacenter" {
     type    = string
-    default = "dc1"
+    default = "test"
 }
 
 variable "image" {
     type    = string
-    default = "bitnami/openldap"
+    default = "ldapaccountmanager/lam"
 }
 
 variable "tag" {
