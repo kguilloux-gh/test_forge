@@ -35,7 +35,7 @@ app "forge/ldap" {
 
 variable "datacenter" {
     type    = string
-    default = "dc1"
+    default = "test"
 }
 
 variable "image" {
