@@ -22,7 +22,7 @@ job "lam-forge" {
         }
 
         network {
-            port "lam" { to = 8080:80 }            
+            port "lam" { to = 8080 }            
         }
         
         task "lam" {
@@ -30,10 +30,14 @@ job "lam-forge" {
             template {
                 data = <<EOH
 LAM_SKIP_PRECONFIGURE=false
-LDAP_SERVER="ldap://hostname:389"
+{{ range service "ldap-forge" }}
+LDAP_SERVER="ldap://{{ .Address }}:{{.Port}}
+{{ end }}
 LAM_LANG="fr_FR"
-LDAP_DOMAIN="asipsante.fr"
-LDAP_BASE_DN="dc=asipsante,dc=fr"
+{{ with secret "forge/lam" }}
+LDAP_DOMAIN={{ .Data.data.domain }}
+LDAP_BASE_DN={{ .Data.data.base_dn }}
+{{ end }}
 ADMIN_USER="cn=Manager,${LDAP_BASE_DN}"
 LDAP_USERS_DN="ou=people,${LDAP_BASE_DN}"
 LDAP_GROUPS_DN="ou=groups,${LDAP_BASE_DN}"
@@ -51,7 +55,6 @@ LAM_PASSWORD={{ .Data.data.password }}
             config {
                 image   = "${image}:${tag}"
                 ports   = ["lam"]
-                volume_driver = "pxd"
             }
             resources {
                 cpu    = 300
@@ -63,7 +66,7 @@ LAM_PASSWORD={{ .Data.data.password }}
                 port = "lam"
                 check {
                     name     = "alive"
-                    type     = "tcp"
+                    type     = "http"
                     interval = "30s"
                     timeout  = "5s"
                     port     = "lam"
