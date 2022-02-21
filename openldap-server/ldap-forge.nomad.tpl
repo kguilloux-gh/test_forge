@@ -22,7 +22,7 @@ job "ldap-forge" {
         }
 
         network {
-            port "ldap" { to = 389 }            
+            port "ldap" { to = 1389 }            
         }
         
         task "openldap" {
