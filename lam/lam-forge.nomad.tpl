@@ -67,6 +67,7 @@ LAM_PASSWORD={{ .Data.data.password }}
                 check {
                     name     = "alive"
                     type     = "http"
+					path     = "/lam"
                     interval = "30s"
                     timeout  = "5s"
                     port     = "lam"
