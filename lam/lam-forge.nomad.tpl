@@ -37,10 +37,6 @@ LAM_LANG="fr_FR"
 {{ with secret "forge/lam" }}
 LDAP_DOMAIN={{ .Data.data.domain }}
 LDAP_BASE_DN={{ .Data.data.base_dn }}
-ADMIN_USER="cn=Manager,{{ .Data.data.base_dn }}"
-LDAP_USERS_DN="ou=people,{{ .Data.data.base_dn }}"
-LDAP_GROUPS_DN="ou=groups,{{ .Data.data.base_dn }}"
-LDAP_USER="cn=Manager,{{ .Data.data.base_dn }}"
 {{ end }}
 {{ with secret "forge/openldap" }}
 LDAP_ADMIN_PASSWORD={{ .Data.data.admin_password }}
