@@ -22,7 +22,7 @@ job "lam-forge" {
         }
 
         network {
-            port "lam" { to = 8080 }            
+            port "lam" { to = 80 }            
         }
         
         task "lam" {
@@ -31,7 +31,7 @@ job "lam-forge" {
                 data = <<EOH
 LAM_SKIP_PRECONFIGURE=false
 {{ range service "ldap-forge" }}
-LDAP_SERVER="ldap://{{ .Address }}:{{.Port}}
+LDAP_SERVER="ldap://{{ .Address }}:{{.Port}}"
 {{ end }}
 LAM_LANG="fr_FR"
 {{ with secret "forge/lam" }}
