@@ -32,8 +32,9 @@ job "ldap-forge" {
 {{ with secret "forge/openldap" }}
 LDAP_ADMIN_USERNAME={{ .Data.data.admin_username }}
 LDAP_ADMIN_PASSWORD={{ .Data.data.admin_password }}
-LDAP_USERS={{ .Data.data.users }}
-LDAP_PASSWORDS={{ .Data.data.users_password }}
+LDAP_ROOT={{ .Data.data.ldap_root }}
+LDAP_GROUP={{
+
 {{ end }}
                 EOH
                 destination = "secrets/file.env"
