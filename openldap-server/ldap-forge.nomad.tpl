@@ -54,7 +54,8 @@ LDAP_PASSWORDS={{ .Data.data.users_password }}
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                port = "ldap"
+                tag = ["urlprefix-:389 proto=tcp"]
+				port = "ldap"
                 check {
                     name     = "alive"
                     type     = "tcp"
