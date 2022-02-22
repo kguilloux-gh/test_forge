@@ -63,6 +63,7 @@ LAM_PASSWORD={{ .Data.data.password }}
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
+				tags = [ "urlprefix-/lam" ]
                 port = "lam"
                 check {
                     name     = "alive"
