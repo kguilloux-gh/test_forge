@@ -44,7 +44,7 @@ LDAP_PASSWORDS={{ .Data.data.users_password }}
             config {
                 image   = "${image}:${tag}"
                 ports   = ["ldap"]
-                volumes = ["name=forge-openldap,io_priority=high,size=2,repl=2:/bitnami/openldap/data"]
+                volumes = ["name=forge-openldap,io_priority=high,size=2,repl=2:/bitnami/openldap"]
                 volume_driver = "pxd"
             }
             resources {
