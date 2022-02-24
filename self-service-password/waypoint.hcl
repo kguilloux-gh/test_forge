@@ -7,7 +7,7 @@ runner {
     data_source "git" {
         url  = "https://github.com/kguilloux-gh/test_forge.git"
         ref  = "main"
-		path = "lam"
+		path = "self-service-password"
 		ignore_changes_outside_path = true
     }
 }
