@@ -1,4 +1,4 @@
-project = "forge/lam"
+project = "forge/self-service-password"
 
 labels = { "domaine" = "forge" }
 
@@ -12,7 +12,7 @@ runner {
     }
 }
 
-app "forge/lam" {
+app "forge/self-service-password" {
 
     build {
         use "docker-pull" {
@@ -24,7 +24,7 @@ app "forge/lam" {
   
     deploy{
         use "nomad-jobspec" {
-            jobspec = templatefile("${path.app}/lam-forge.nomad.tpl", {
+            jobspec = templatefile("${path.app}/self-service-password-forge.nomad.tpl", {
             image   = var.image
             tag     = var.tag
             datacenter = var.datacenter
@@ -40,7 +40,7 @@ variable "datacenter" {
 
 variable "image" {
     type    = string
-    default = "ldapaccountmanager/lam"
+    default = "ltbproject/self-service-password"
 }
 
 variable "tag" {

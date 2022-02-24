@@ -1,4 +1,4 @@
-job "ldap-forge" {
+job "self-service-password-forge" {
     datacenters = ["${datacenter}"]
 	type = "service"
 
@@ -6,7 +6,7 @@ job "ldap-forge" {
         policies = ["forge"]
         change_mode = "restart"
     }
-    group "ldap-server" {    
+    group "self-service-password-server" {    
         count ="1"
         
         restart {
@@ -22,29 +22,20 @@ job "ldap-forge" {
         }
 
         network {
-            port "ldap" { to = 1389 }            
+            port "self-service-password" { to = 81 }            
         }
         
-        task "openldap" {
+        task "self-service-password" {
             driver = "docker"
             template {
-                data = <<EOH
-{{ with secret "forge/openldap" }}
-LDAP_ADMIN_USERNAME={{ .Data.data.admin_username }}
-LDAP_ADMIN_PASSWORD={{ .Data.data.admin_password }}
-LDAP_ROOT={{ .Data.data.ldap_root }}
-{{ end }}
-                EOH
-                destination = "secrets/file.env"
+			    source = "config.inc.php.tp"
+				destination = "var/www/conf/config.inc.php"
                 change_mode = "restart"
-                env = true
             }
 
             config {
                 image   = "${image}:${tag}"
-                ports   = ["ldap"]
-                volumes = ["name=forge-openldap,io_priority=high,size=2,repl=2:/bitnami/openldap"]
-                volume_driver = "pxd"
+                ports   = ["self-service-password"]
             }
             resources {
                 cpu    = 300
@@ -53,14 +44,15 @@ LDAP_ROOT={{ .Data.data.ldap_root }}
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = ["urlprefix-:389 proto=tcp"]
-				port = "ldap"
+				tags = [ "urlprefix-/self-service-password" ]
+                port = "self-service-password"
                 check {
                     name     = "alive"
-                    type     = "tcp"
+                    type     = "http"
+					path     = "/self-service-password"
                     interval = "30s"
                     timeout  = "5s"
-                    port     = "ldap"
+                    port     = "self-service-password"
                 }
             }
         } 

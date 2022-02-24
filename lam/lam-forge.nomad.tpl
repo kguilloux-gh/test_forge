@@ -44,7 +44,6 @@ LDAP_USER="cn=Manager,{{ .Data.data.base_dn }}"
 {{ end }}
 {{ with secret "forge/openldap" }}
 LDAP_ADMIN_PASSWORD={{ .Data.data.admin_password }}
-LAM_PASSWORD={{ .Data.data.password }}
 {{ end }}
                 EOH
                 destination = "secrets/file.env"
