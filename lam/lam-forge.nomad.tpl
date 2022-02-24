@@ -39,7 +39,7 @@ LDAP_DOMAIN={{ .Data.data.domain }}
 LDAP_BASE_DN={{ .Data.data.base_dn }}
 ADMIN_USER="cn=Manager,{{ .Data.data.base_dn }}"
 LDAP_USERS_DN="ou=people,{{ .Data.data.base_dn }}"
-LDAP_GROUPS_DN="ou=groups,{{ .Data.data.base_dn }}"
+LDAP_GROUPS_DN="ou=group,{{ .Data.data.base_dn }}"
 LDAP_USER="cn=Manager,{{ .Data.data.base_dn }}"
 {{ end }}
 {{ with secret "forge/openldap" }}
