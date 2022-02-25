@@ -15,6 +15,11 @@ job "self-service-password-forge" {
             interval = "1h"
             mode = "fail"
         }
+		
+        constraint {
+            attribute = "$\u007Bnode.class\u007D"
+            value     = "standard"
+        }
 
         network {
             port "self-service-password" { to = 81 }            
