@@ -22,11 +22,7 @@ job "self-service-password-forge" {
         
         task "self-service-password" {
             driver = "docker"
-            template {
-			    source = "config.inc.php.tp"
-				destination = "var/www/conf/config.inc.php"
-                change_mode = "restart"
-            }
+
 
             config {
                 image   = "${image}:${tag}"
