@@ -15,11 +15,6 @@ job "lam-forge" {
             interval = "1h"
             mode = "fail"
         }
-		
-        constraint {
-            attribute = "$\u007Bnode.class\u007D"
-            value     = "standard"
-        }
 
         network {
             port "lam" { to = 80 }            

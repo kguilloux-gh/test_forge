@@ -35,7 +35,7 @@ app "forge/lam" {
 
 variable "datacenter" {
     type    = string
-    default = "test"
+    default = "henix_docker_platforme_test"
 }
 
 variable "image" {
