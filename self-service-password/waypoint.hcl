@@ -35,7 +35,7 @@ app "forge/self-service-password" {
 
 variable "datacenter" {
     type    = string
-    default = "henix_docker_platforme_test"
+    default = "henix_docker_platform_test"
 }
 
 variable "image" {
