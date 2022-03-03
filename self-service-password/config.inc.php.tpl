@@ -23,7 +23,7 @@
 # Configuration
 #==============================================================================
 # LDAP
-$ldap_url = "ldap://localhost:389";
+$ldap_url = "ldap://{{ .Address }}:{{.Port}}";
 $ldap_binddn = "cn=Manager,dc=asipsante,dc=fr";
 $ldap_bindpw = "password";
 $ldap_base = "dc=asipsante,dc=fr";
