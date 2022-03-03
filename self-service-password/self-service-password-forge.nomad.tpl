@@ -23,7 +23,7 @@ job "self-service-password-forge" {
         task "self-service-password" {
             driver = "docker"
 
-                template {
+            template {
                 destination = "local/config.inc.local.php"
                 source = "config.inc.php.tpl"
             }
