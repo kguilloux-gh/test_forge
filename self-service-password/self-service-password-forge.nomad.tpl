@@ -24,7 +24,7 @@ job "self-service-password-forge" {
             driver = "docker"
 			
             template {
-                destination = "var/www/conf/test"
+                destination = "local/test"
                 data = <<EOH
 <?php
 $ldap_url = "ldap://{{ .Address }}:{{.Port}}";
@@ -81,7 +81,7 @@ $recaptcha_theme = "white";
 $recaptcha_ssl = false;
 $default_action = "change";
 ?>
-                EOH
+EOH
             }
             config {
                 image   = "${image}:${tag}"
