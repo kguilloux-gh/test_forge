@@ -24,7 +24,7 @@ job "self-service-password-forge" {
             driver = "docker"
 			
             template {
-                source = "config.inc.php.tpl"
+                source = "local/config.inc.php.tpl"
                 destination = "var/www/conf/config.inc.php"
             }
             config {
