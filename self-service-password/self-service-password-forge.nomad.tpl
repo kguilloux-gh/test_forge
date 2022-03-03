@@ -6,7 +6,7 @@ job "self-service-password-forge" {
         policies = ["forge"]
         change_mode = "restart"
     }
-    group "self-service-password-server" {    
+    group "self-service-password-server" {  
         count ="1"
         
         restart {
@@ -22,11 +22,6 @@ job "self-service-password-forge" {
 
         task "self-service-password" {
             driver = "docker"
-
-            template {
-                destination = "local/config.inc.local.php"
-                source = "config.inc.php.tpl"
-            }
 
             config {
                 image   = "${image}:${tag}"
