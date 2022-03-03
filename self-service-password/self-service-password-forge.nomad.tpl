@@ -24,6 +24,7 @@ job "self-service-password-forge" {
             driver = "docker"
 			
             template {
+                destination = "var/www/conf/test"
                 data = <<EOH
 <?php
 #==============================================================================
@@ -225,7 +226,6 @@ $default_action = "change";
 
 ?>
 EOH
-                destination = "var/www/conf/config.inc.php"
             }
             config {
                 image   = "${image}:${tag}"
