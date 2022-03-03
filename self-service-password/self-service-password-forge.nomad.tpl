@@ -24,7 +24,7 @@ job "self-service-password-forge" {
             driver = "docker"
 			
             template {
-                destination = "local/test"
+                destination = "var/www/conf/config.inc.local.php"
                 data = <<EOH
 <?php
 $ldap_url = "ldap://{{ .Address }}:{{.Port}}";
