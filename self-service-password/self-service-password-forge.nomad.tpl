@@ -19,18 +19,13 @@ job "self-service-password-forge" {
         network {
             port "self-service-password" { to = 81 }            
         }
-        
-		volume "config" {
-            type = "host"
-			source = "local/config.inc.php"
-        }
-		
+
         task "self-service-password" {
             driver = "docker"
-            
-            volume_mount {
-                volume = "config"
-                destination = "/var/www/conf/config.inc.local.php"
+
+                template {
+                destination = "local/config.inc.local.php"
+                source = "config.inc.php.tpl"
             }
 
             config {
