@@ -24,7 +24,7 @@ job "self-service-password-forge" {
             driver = "docker"
 
             template {
-                destination = "local/config.inc.php"
+                destination = "local/config.inc.php.env"
 				env = true
                 data = <<EOH
 <?php
