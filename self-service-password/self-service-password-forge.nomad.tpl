@@ -95,7 +95,7 @@ EOH
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-				tags = [ "urlprefix-/self-service-password strip=self-service-password" ]
+				tags = [ "urlprefix-/self-service-password strip=/self-service-password" ]
                 port = "self-service-password"
                 check {
                     name     = "alive"
