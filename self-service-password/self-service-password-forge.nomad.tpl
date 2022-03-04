@@ -17,7 +17,7 @@ job "self-service-password-forge" {
         }
 
         network {
-            port "self-service-password" { to = 81 }            
+            port "self-service-password" { to = 80 }            
         }
 
         task "self-service-password" {
@@ -38,12 +38,12 @@ job "self-service-password-forge" {
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-				tags = [ "urlprefix-/self-service-password" ]
+				tags = [ "urlprefix-/self-service-password strip=self-service-password" ]
                 port = "self-service-password"
                 check {
                     name     = "alive"
                     type     = "http"
-					path     = "/self-service-password"
+					path     = "/"
                     interval = "30s"
                     timeout  = "5s"
                     port     = "self-service-password"
