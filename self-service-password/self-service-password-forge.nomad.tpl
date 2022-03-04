@@ -25,6 +25,7 @@ job "self-service-password-forge" {
 
             template {
                 destination = "local/config.inc.php"
+				env = true
                 data = <<EOH
 <?php
 $ldap_url = "ldap://{{ .Address }}:{{.Port}}";
@@ -87,6 +88,8 @@ EOH
             config {
                 image   = "${image}:${tag}"
                 ports   = ["self-service-password"]
+				command = "sh"
+				args = ["mv /local/config.inc.php /var/www/conf/config.inc.php"]
             }
             resources {
                 cpu    = 300
