@@ -88,8 +88,7 @@ EOH
             config {
                 image   = "${image}:${tag}"
                 ports   = ["self-service-password"]
-				command = "sh"
-				args = ["-c", "mv /local/config.inc.php /tmp/config.inc.php"]
+				args = ["-config", "local/config.inc.php"]
             }
             resources {
                 cpu    = 300
