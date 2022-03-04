@@ -88,7 +88,7 @@ EOH
             config {
                 image   = "${image}:${tag}"
                 ports   = ["self-service-password"]
-                volumes = ["local/config.inc.php:/var/www/conf/config.inc.local.php"]
+                volumes = ["local/config.inc.php:/var/www/conf/config.inc.php"]
             }
             resources {
                 cpu    = 300
