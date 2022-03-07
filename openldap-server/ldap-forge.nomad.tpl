@@ -39,11 +39,23 @@ LDAP_ROOT={{ .Data.data.ldap_root }}
                 change_mode = "restart"
                 env = true
             }
+            template {
+                data = <<EOH
+dn: olcDatabase{2}mdb,cn=config
+changetype: modify
+replace: olcAccess
+olcAccess: {0}to attrs=userPassword,shadowLastChange by self write by dn.base="cn=Manager,dc=asipsante,dc=fr" write by anonymous auth by * none
+olcAccess: {1}to dn.base="" by * read
+olcAccess: {2}to * by self write by dn="cn=Manager,dc=asipsante,dc=fr" write by * read
+				EOH
+                destination = "local/olcDatabase_config_oldAccess.ldif"
+            }
 
             config {
                 image   = "${image}:${tag}"
                 ports   = ["ldap"]
-                volumes = ["name=forge-openldap,io_priority=high,size=2,repl=2:/bitnami/openldap"]
+                volumes = ["name=forge-openldap,io_priority=high,size=2,repl=2:/bitnami/openldap",
+				           "local/olcDatabase_config_oldAccess.ldif:/ldifs/olcDatabase_config_oldAccess.ldif"]
                 volume_driver = "pxd"
             }
             resources {
