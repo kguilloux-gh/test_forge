@@ -226,7 +226,7 @@ $question_populate_enable = false;
 # Use tokens?
 # true (default)
 # false
-$use_tokens = true;
+$use_tokens = false;
 # Crypt tokens?
 # true (default)
 # false
@@ -318,7 +318,7 @@ $show_menu = true;
 $logo = "images/ltb-logo.png";
 
 # Background image
-$background_image = "images/unsplash-space.jpeg";
+#$background_image = "images/unsplash-space.jpeg";
 
 $custom_css = "";
 $display_footer = true;
