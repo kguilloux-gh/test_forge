@@ -28,34 +28,7 @@ job "self-service-password-forge" {
 				
                 data = <<EOH
 <?php
-#==============================================================================
-# LTB Self Service Password
-#
-# Copyright (C) 2009 Clement OUDOT
-# Copyright (C) 2009 LTB-project.org
-#
-# This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# GPL License: http://www.gnu.org/licenses/gpl.txt
-#
-#==============================================================================
-
-#==============================================================================
-# All the default values are kept here, you should not modify it but use
-# config.inc.local.php file instead to override the settings from here.
-#==============================================================================
-
-#==============================================================================
-# Configuration
-#==============================================================================
+# ANS configuration
 
 # Debug mode
 # true: log and display any errors or warnings (use this in configuration/testing)
@@ -370,74 +343,7 @@ $default_action = "change";
 
 ## Rest API
 $use_restapi = false;
-
-## Extra messages
-# They can also be defined in lang/ files
-#$messages['passwordchangedextramessage'] = NULL;
-#$messages['changehelpextramessage'] = NULL;
-
-## Pre Hook
-# Launch a prehook script before changing password.
-# Script should return with 0, to allow password change.
-# Any other exit code would abort password modification
-#$prehook = "/usr/share/self-service-password/prehook.sh";
-# Display prehook error
-#$display_prehook_error = true;
-# Encode passwords sent to prehook script as base64. This will prevent alteration of the passwords if set to true.
-# To read the actual password in the prehook script, use a base64_decode function/tool
-#$prehook_password_encodebase64 = false;
-# Ignore prehook error. This will allow to change password even if prehook script fails.
-#$ignore_prehook_error = true;
-
-## Post Hook
-# Launch a posthook script after successful password change
-#$posthook = "/usr/share/self-service-password/posthook.sh";
-# Display posthook error
-#$display_posthook_error = true;
-# Encode passwords sent to posthook script as base64. This will prevent alteration of the passwords if set to true.
-# To read the actual password in the posthook script, use a base64_decode function/tool
-#$posthook_password_encodebase64 = false;
-
-# Force setlocale if your default PHP configuration is not correct
-#setlocale(LC_CTYPE, "en_US.UTF-8");
-
-# Hide some messages to not disclose sensitive information
-# These messages will be replaced by badcredentials error
-#$obscure_failure_messages = array("mailnomatch");
-
-# HTTP Header name that may hold a login to preset in forms
-#$header_name_preset_login="Auth-User";
-
-# The name of an HTTP Header that may hold a reference to an extra config file to include.
-#$header_name_extra_config="SSP-Extra-Config";
-
-# Cache directory
-#$smarty_compile_dir = "/var/cache/self-service-password/templates_c";
-#$smarty_cache_dir = "/var/cache/self-service-password/cache";
-
-# Smarty
-if (!defined("SMARTY")) {
-    define("SMARTY", "/usr/share/php/smarty3/Smarty.class.php");
-}
-
-# Set preset login from HTTP header $header_name_preset_login
-$presetLogin = "";
-if (isset($header_name_preset_login)) {
-    $presetLoginKey = "HTTP_".strtoupper(str_replace('-','_',$header_name_preset_login));
-    if (array_key_exists($presetLoginKey, $_SERVER)) {
-        $presetLogin = preg_replace("/[^a-zA-Z0-9-_@\.]+/", "", filter_var($_SERVER[$presetLoginKey], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH));
-    }
-}
-# Allow to override current settings with an extra configuration file, whose reference is passed in HTTP_HEADER $header_name_extra_config
-if (isset($header_name_extra_config)) {
-    $extraConfigKey = "HTTP_".strtoupper(str_replace('-','_',$header_name_extra_config));
-    if (array_key_exists($extraConfigKey, $_SERVER)) {
-        $extraConfig = preg_replace("/[^a-zA-Z0-9-_]+/", "", filter_var($_SERVER[$extraConfigKey], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH));
-        if (strlen($extraConfig) > 0 && file_exists (__DIR__ . "/config.inc.".$extraConfig.".php")) {
-            require  __DIR__ . "/config.inc.".$extraConfig.".php";
-        }
-    }
-}
+?>
 EOH
             }
 			
