@@ -226,7 +226,7 @@ $question_populate_enable = false;
 # Use tokens?
 # true (default)
 # false
-$use_tokens = false;
+$use_tokens = true;
 # Crypt tokens?
 # true (default)
 # false
@@ -296,7 +296,7 @@ $max_attempts = 3;
 # Encryption, decryption keyphrase, required if $use_tokens = true and $crypt_tokens = true, or $use_sms, or $crypt_answer
 # Please change it to anything long, random and complicated, you do not have to remember it
 # Changing it will also invalidate all previous tokens and SMS codes
-$keyphrase = "secret";
+$keyphrase = "anssecret";
 
 # Reset URL (if behind a reverse proxy)
 #$reset_url = $_SERVER['HTTP_X_FORWARDED_PROTO'] . "://" . $_SERVER['HTTP_X_FORWARDED_HOST'] . $_SERVER['SCRIPT_NAME'];
@@ -318,7 +318,7 @@ $show_menu = true;
 $logo = "images/ltb-logo.png";
 
 # Background image
-#$background_image = "images/unsplash-space.jpeg";
+$background_image = "images/unsplash-clouds.jpeg";
 
 $custom_css = "";
 $display_footer = true;
