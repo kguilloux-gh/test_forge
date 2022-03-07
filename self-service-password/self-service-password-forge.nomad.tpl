@@ -453,7 +453,7 @@ EOH
             }
             resources {
                 cpu    = 300
-                memory = 512
+                memory = 1026
             }
             
             service {
