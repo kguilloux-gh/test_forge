@@ -415,11 +415,6 @@ $use_restapi = false;
 #$smarty_compile_dir = "/var/cache/self-service-password/templates_c";
 #$smarty_cache_dir = "/var/cache/self-service-password/cache";
 
-# Allow to override current settings with local configuration
-if (file_exists (__DIR__ . '/config.inc.local.php')) {
-    require __DIR__ . '/config.inc.local.php';
-}
-
 # Smarty
 if (!defined("SMARTY")) {
     define("SMARTY", "/usr/share/php/smarty3/Smarty.class.php");
@@ -453,7 +448,7 @@ EOH
             }
             resources {
                 cpu    = 300
-                memory = 1026
+                memory = 512
             }
             
             service {
