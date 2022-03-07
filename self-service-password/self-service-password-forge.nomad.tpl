@@ -28,7 +28,9 @@ job "self-service-password-forge" {
 				
                 data = <<EOH
 <?php
+{{ range service "ldap-forge" }}
 $ldap_url = "ldap://{{ .Address }}:{{.Port}}";
+{{ end }}
 $ldap_binddn = "cn=Manager,dc=asipsante,dc=fr";
 $ldap_bindpw = "password";
 $ldap_base = "dc=asipsante,dc=fr";
