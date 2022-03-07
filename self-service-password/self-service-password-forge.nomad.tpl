@@ -269,29 +269,7 @@ $mail_priority = 3;
 
 ## SMS
 # Use sms
-$use_sms = true;
-# SMS method (mail, api)
-$sms_method = "mail";
-$sms_api_lib = "lib/smsapi.inc.php";
-# GSM number attribute
-$sms_attribute = "mobile";
-# Partially hide number
-$sms_partially_hide_number = true;
-# Send SMS mail to address
-$smsmailto = "{sms_attribute}@service.provider.com";
-# Subject when sending email to SMTP to SMS provider
-$smsmail_subject = "Provider code";
-# Message
-$sms_message = "{smsresetmessage} {smstoken}";
-# Remove non digit characters from GSM number
-$sms_sanitize_number = false;
-# Truncate GSM number
-$sms_truncate_number = false;
-$sms_truncate_number_length = 10;
-# SMS token length
-$sms_token_length = 6;
-# Max attempts allowed for SMS token
-$max_attempts = 3;
+$use_sms = false;
 
 # Encryption, decryption keyphrase, required if $use_tokens = true and $crypt_tokens = true, or $use_sms, or $crypt_answer
 # Please change it to anything long, random and complicated, you do not have to remember it
@@ -318,7 +296,7 @@ $show_menu = true;
 $logo = "images/ltb-logo.png";
 
 # Background image
-$background_image = "images/unsplash-clouds.jpeg";
+$background_image = "images/unsplash-stars.jpeg";
 
 $custom_css = "";
 $display_footer = true;
