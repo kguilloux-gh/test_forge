@@ -27,14 +27,8 @@ job "self-service-password-forge" {
                 destination = "local/config.inc.local.php"
                 data = <<EOH
 <?php
-# ANS configuration
+# ANS configuration 
 
-# Debug mode
-# true: log and display any errors or warnings (use this in configuration/testing)
-# false: log only errors and do not display them (use this in production)
-$debug = true;
-
-# LDAP
 {{ range service "ldap-forge" }}
 $ldap_url = "ldap://{{ .Address }}:{{.Port}}";
 {{ end }}
