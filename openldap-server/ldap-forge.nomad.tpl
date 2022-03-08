@@ -33,6 +33,7 @@ job "ldap-forge" {
 LDAP_ADMIN_USERNAME={{ .Data.data.admin_username }}
 LDAP_ADMIN_PASSWORD={{ .Data.data.admin_password }}
 LDAP_ROOT={{ .Data.data.ldap_root }}
+LDAP_CONFIG_ADMIN_ENABLED=yes
 {{ end }}
                 EOH
                 destination = "secrets/file.env"
