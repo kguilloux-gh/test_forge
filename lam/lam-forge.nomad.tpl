@@ -37,6 +37,7 @@ LDAP_USERS_DN="ou=people,{{ .Data.data.base_dn }}"
 LDAP_GROUPS_DN="ou=group,{{ .Data.data.base_dn }}"
 LDAP_USER="cn=Manager,{{ .Data.data.base_dn }}"
 {{ end }}
+LDAP_ORGANISATION="adminconf"
 {{ with secret "forge/openldap" }}
 LDAP_ADMIN_PASSWORD={{ .Data.data.admin_password }}
 {{ end }}
