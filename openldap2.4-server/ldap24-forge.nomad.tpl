@@ -27,18 +27,7 @@ job "ldap24-forge" {
         
         task "openldap24" {
             driver = "docker"
-            template {
-                data = <<EOH
-{{ with secret "forge/openldap" }}
-LDAP_DOMAIN={{ .Data.data.admin_username }}
-LDAP_ADMIN_PASSWORD={{ .Data.data.admin_password }}
-LDAP_BASE_DN={{ .Data.data.ldap_root }}
-{{ end }}
-                EOH
-                destination = "secrets/file.env"
-                change_mode = "restart"
-                env = true
-            }
+
 
             config {
                 image   = "${image}:${tag}"
