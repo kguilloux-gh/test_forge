@@ -32,8 +32,8 @@ job "ldap24-forge" {
             config {
                 image   = "${image}:${tag}"
                 ports   = ["ldap"]
-                volumes = ["name=forge-openldap2.4-conf,io_priority=high,size=2,repl=2:/etc/ldap/slapd.d",
-				           "name=forge-openldap2.4-data,io_priority=high,size=2,repl=2:/var/lib/ldap"]
+                volumes = ["name=forge-openldap24-conf,io_priority=high,size=2,repl=2:/etc/ldap/slapd.d",
+				           "name=forge-openldap24-data,io_priority=high,size=2,repl=2:/var/lib/ldap"]
                 volume_driver = "pxd"
             }
             resources {
