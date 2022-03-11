@@ -37,6 +37,9 @@ $ldap_bindpw = '{{ .Data.data.admin_password }}';
 $ldap_base = "{{ .Data.data.ldap_root }}";
 {{ end }}
 $mail_smtp_host = "10.0.49.162";
+$mail_smtp_auth = true;
+$mail_smtp_user = 'login';
+$mail_smtp_pass = 'password';
 $hash = "SSHA";
 $pwd_min_length = 8;
 $pwd_max_length = 16;
