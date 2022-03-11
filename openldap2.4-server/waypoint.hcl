@@ -24,7 +24,7 @@ app "forge/ldap2.4" {
   
     deploy{
         use "nomad-jobspec" {
-            jobspec = templatefile("${path.app}/ldap2.4-forge.nomad.tpl", {
+            jobspec = templatefile("${path.app}/ldap24-forge.nomad.tpl", {
             image   = var.image
             tag     = var.tag
             datacenter = var.datacenter
