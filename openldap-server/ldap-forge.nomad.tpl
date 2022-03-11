@@ -34,8 +34,8 @@ LDAP_ADMIN_USERNAME={{ .Data.data.admin_username }}
 LDAP_ADMIN_PASSWORD={{ .Data.data.admin_password }}
 LDAP_ROOT={{ .Data.data.ldap_root }}
 LDAP_CONFIG_ADMIN_ENABLED="yes"
-LDAP_CONFIG_ADMIN_USERNAME="adminconf"
-LDAP_CONFIG_ADMIN_PASSWORD="passwordtest"
+LDAP_CONFIG_ADMIN_USERNAME={{ .Data.data.config_admin_username }}
+LDAP_CONFIG_ADMIN_PASSWORD={{ .Data.data.config_admin_password }}
 {{ end }}
                 EOH
                 destination = "secrets/file.env"
