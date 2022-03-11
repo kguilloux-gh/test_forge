@@ -1,4 +1,4 @@
-job "ldap2.4-forge" {
+job "ldap24-forge" {
     datacenters = ["${datacenter}"]
 	type = "service"
 
@@ -6,7 +6,7 @@ job "ldap2.4-forge" {
         policies = ["forge"]
         change_mode = "restart"
     }
-    group "ldap2.4-server" {    
+    group "ldap24-server" {    
         count ="1"
         
         restart {
@@ -25,7 +25,7 @@ job "ldap2.4-forge" {
             port "ldap" { to = 1389 }            
         }
         
-        task "openldap2.4" {
+        task "openldap24" {
             driver = "docker"
             template {
                 data = <<EOH
