@@ -35,7 +35,7 @@ app "forge/ldap2.4" {
 
 variable "datacenter" {
     type    = string
-    default = "test"
+    default = "henix_docker_platform_test"
 }
 
 variable "image" {
