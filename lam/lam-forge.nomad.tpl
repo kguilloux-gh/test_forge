@@ -26,19 +26,18 @@ job "lam-forge" {
                 data = <<EOH
 LAM_SKIP_PRECONFIGURE=false
 {{ range service "ldap-forge" }}
-LDAP_SERVER="ldap://{{ .Address }}:{{.Port}}"
+LDAP_SERVER=ldap://{{ .Address }}:{{.Port}}
 {{ end }}
 LAM_LANG="fr_FR"
 {{ with secret "forge/lam" }}
 LDAP_DOMAIN={{ .Data.data.domain }}
-LDAP_BASE_DN={{ .Data.data.base_dn }}
-ADMIN_USER="cn=Manager,{{ .Data.data.base_dn }}"
-LDAP_USERS_DN="ou=people,{{ .Data.data.base_dn }}"
-LDAP_GROUPS_DN="ou=group,{{ .Data.data.base_dn }}"
-LDAP_USER="cn=Manager,{{ .Data.data.base_dn }}"
 {{ end }}
-LDAP_ORGANISATION="adminconf"
 {{ with secret "forge/openldap" }}
+LDAP_BASE_DN={{ .Data.data.ldap_root }}
+ADMIN_USER="cn=Manager,{{ .Data.data.ldap_root }}"
+LDAP_USERS_DN="ou=people,{{ .Data.data.ldap_root }}"
+LDAP_GROUPS_DN="ou=group,{{ .Data.data.ldap_root }}"
+LDAP_USER="cn=Manager,{{ .Data.data.ldap_root }}"
 LDAP_ADMIN_PASSWORD={{ .Data.data.admin_password }}
 {{ end }}
                 EOH
