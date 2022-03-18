@@ -45,7 +45,7 @@ LDAP_ADMIN_PASSWORD={{ .Data.data.admin_password }}
             }
 
             config {
-			    extra_hosts = ["ldap-ip:$\u007BNOMAD_IP_ldap\u007D"]
+			    extra_hosts = ["ldap-ip:$\u007BNOMAD_IP_http\u007D"]
                 image   = "${image}:${tag}"
                 ports   = ["lam"]
             }
