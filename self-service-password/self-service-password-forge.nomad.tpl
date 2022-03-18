@@ -62,12 +62,12 @@ EOH
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-				tags = [ "urlprefix-self-service-password.henix.asipsante.fr/pwd" ]
+				tags = [ "urlprefix-self-service-password.henix.asipsante.fr" ]
                 port = "self-service-password"
                 check {
                     name     = "alive"
                     type     = "http"
-					path     = "/pwd"
+					path     = "/"
                     interval = "30s"
                     timeout  = "5s"
                     port     = "self-service-password"
