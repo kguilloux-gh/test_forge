@@ -25,7 +25,9 @@ job "lam-forge" {
             template {
                 data = <<EOH
 LAM_SKIP_PRECONFIGURE=false
-LDAP_SERVER=ldap://ldap-ip:9999
+{{ range service "ldap-forge" }}
+LDAP_SERVER=ldap://{{ .Address }}:{{.Port}}
+{{ end }}
 LAM_LANG="fr_FR"
 {{ with secret "forge/lam" }}
 LDAP_DOMAIN={{ .Data.data.domain }}
@@ -45,7 +47,6 @@ LDAP_ADMIN_PASSWORD={{ .Data.data.admin_password }}
             }
 
             config {
-			    extra_hosts = ["ldap-ip:$\u007BNOMAD_IP_389\u007D"]
                 image   = "${image}:${tag}"
                 ports   = ["lam"]
             }
