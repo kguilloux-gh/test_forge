@@ -17,7 +17,8 @@ job "lam-forge" {
         }
 
         network {
-            port "lam" { to = 80 }            
+            port "lam" { to = 80 }
+            port "ldap" { to = 389 }
         }
         
         task "lam" {
@@ -25,9 +26,7 @@ job "lam-forge" {
             template {
                 data = <<EOH
 LAM_SKIP_PRECONFIGURE=false
-{{ range service "ldap-forge" }}
-LDAP_SERVER=ldap://{{ .Address }}:{{.Port}}
-{{ end }}
+LDAP_SERVER=ldap://ldap-ip:389
 LAM_LANG="fr_FR"
 {{ with secret "forge/lam" }}
 LDAP_DOMAIN={{ .Data.data.domain }}
@@ -47,6 +46,7 @@ LDAP_ADMIN_PASSWORD={{ .Data.data.admin_password }}
             }
 
             config {
+                extra_hosts = ["ldap-ip:$\u007BNOMAD_IP_ldap\u007D"]
                 image   = "${image}:${tag}"
                 ports   = ["lam"]
             }
