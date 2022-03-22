@@ -17,7 +17,7 @@ job "self-service-password-forge" {
         }
 
         network {
-            port "self-service-password" { to = 5000 }            
+            port "self-service-password" { to = 6000 }            
         }
 
         task "self-service-password" {
@@ -62,7 +62,7 @@ EOH
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = [ "urlprefix-:5000 proto=http" ]
+                tags = [ "urlprefix-:6000 proto=http" ]
                 port = "self-service-password"
                 check {
                     name     = "alive"
