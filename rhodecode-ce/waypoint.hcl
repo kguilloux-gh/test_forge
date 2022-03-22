@@ -46,7 +46,7 @@ app "ans/rhodecode" {
 
 variable "datacenter" {
   type    = string
-  default = "dc1"
+  default = "henix_docker_platform_test"
 }
 
 variable "dockerfile_path" {
