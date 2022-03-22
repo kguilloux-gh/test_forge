@@ -62,7 +62,7 @@ EOH
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = [ "urlprefix-:81 proto=http" ]
+                tags = [ "urlprefix-:81/pwd proto=http" ]
                 port = "self-service-password"
                 check {
                     name     = "alive"
