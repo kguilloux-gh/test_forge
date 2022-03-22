@@ -62,7 +62,7 @@ EOH
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-				tags = [ "urlprefix-/pwd" ]
+                tags = [ "urlprefix-/" ]
                 port = "self-service-password"
                 check {
                     name     = "alive"
