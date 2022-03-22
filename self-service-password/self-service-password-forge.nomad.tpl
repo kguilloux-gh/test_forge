@@ -67,7 +67,7 @@ EOH
                 check {
                     name     = "alive"
                     type     = "http"
-                    path     = "/pwd"
+                    path     = "/"
                     interval = "30s"
                     timeout  = "5s"
                     port     = "self-service-password"
