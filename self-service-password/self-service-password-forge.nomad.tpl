@@ -65,9 +65,10 @@ EOH
                 tags = [ "urlprefix-:6000 proto=tcp" ]
                 port = "self-service-password"
                 check {
+				    port     = "self-service-password"
                     name     = "alive"
                     type     = "http"
-                    path     = "/"
+                    path     = "/pwd"
                     interval = "30s"
                     timeout  = "5s"
                     port     = "self-service-password"
