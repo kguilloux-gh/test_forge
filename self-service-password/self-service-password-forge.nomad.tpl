@@ -36,6 +36,9 @@ $ldap_binddn = "cn=Manager,{{ .Data.data.ldap_root }}";
 $ldap_bindpw = '{{ .Data.data.admin_password }}';
 $ldap_base = "{{ .Data.data.ldap_root }}";
 {{ end }}
+$mail_from = "admin@self-service-password.esante.gouv.fr";
+$mail_from_name = "Self Service Password administrator";
+$mail_signature = "";
 $mail_address_use_ldap = true;
 $mail_protocol = 'smtp';
 $mail_smtp_debug = 3;
