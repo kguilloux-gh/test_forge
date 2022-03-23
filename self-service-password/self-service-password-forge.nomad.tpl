@@ -66,7 +66,7 @@ EOH
 				port = "self-service-password"
                 check {
                     name     = "alive"
-                    type     = "http"
+                    type     = "tcp"
                     path     = "/"
                     interval = "30s"
                     timeout  = "5s"
