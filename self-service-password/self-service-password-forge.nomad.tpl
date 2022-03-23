@@ -36,18 +36,19 @@ $ldap_binddn = "cn=Manager,{{ .Data.data.ldap_root }}";
 $ldap_bindpw = '{{ .Data.data.admin_password }}';
 $ldap_base = "{{ .Data.data.ldap_root }}";
 {{ end }}
-$mail_from = "admin@self-service-password.esante.gouv.fr";
+{{ with secret "forge/self-service-password" }}
+$mail_from = "{{ .Data.data.mail_from }}";
 $mail_from_name = "Self Service Password administrator";
 $mail_signature = "";
 $mail_address_use_ldap = true;
 $mail_protocol = 'smtp';
 $mail_smtp_debug = 3;
 $mail_debug_format = 'html';
-$mail_smtp_host = 'e-ac-smtp01';
+$mail_smtp_host = '{{ .Data.data.mail_server_host }}';
 $mail_smtp_auth = false;
 $mail_smtp_user = '';
 $mail_smtp_pass = '';
-$mail_smtp_port = 25;
+$mail_smtp_port = {{ .Data.data.mail_server_port }};
 $mail_smtp_timeout = 30;
 $mail_smtp_keepalive = false;
 $mail_smtp_secure = false;
@@ -57,6 +58,7 @@ $mail_contenttype = 'text/plain';
 $mail_wordwrap = 0;
 $mail_charset = 'utf-8';
 $mail_priority = 3;
+{{ end }}
 $hash = "SSHA";
 $pwd_min_length = 8;
 $pwd_max_length = 16;
