@@ -37,6 +37,7 @@ $ldap_bindpw = '{{ .Data.data.admin_password }}';
 $ldap_base = "{{ .Data.data.ldap_root }}";
 {{ end }}
 $use_tokens = false;
+$use_sms = false;
 $hash = "SSHA";
 $pwd_min_length = 8;
 $pwd_max_length = 16;
