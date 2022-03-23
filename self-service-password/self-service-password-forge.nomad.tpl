@@ -17,7 +17,7 @@ job "self-service-password-forge" {
         }
 
         network {
-            port "self-service-password" { to = 80 }            
+            port "self-service-password" { to = 6000 }            
         }
 
         task "self-service-password" {
