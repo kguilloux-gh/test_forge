@@ -38,7 +38,7 @@ $ldap_base = "{{ .Data.data.ldap_root }}";
 {{ end }}
 $mail_address_use_ldap = true;
 $mail_protocol = 'smtp';
-$mail_smtp_debug = 0;
+$mail_smtp_debug = 3;
 $mail_debug_format = 'html';
 $mail_smtp_host = 'e-ac-smtp01';
 $mail_smtp_auth = false;
