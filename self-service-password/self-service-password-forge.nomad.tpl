@@ -17,7 +17,7 @@ job "self-service-password-forge" {
         }
 
         network {
-            port "self-service-password" { to = 6000 }            
+            port "self-service-password" { to = 80 }            
         }
 
         task "self-service-password" {
@@ -36,7 +36,8 @@ $ldap_binddn = "cn=Manager,{{ .Data.data.ldap_root }}";
 $ldap_bindpw = '{{ .Data.data.admin_password }}';
 $ldap_base = "{{ .Data.data.ldap_root }}";
 {{ end }}
-$mail_address_use_ldap = true;
+$use_tokens = false;
+$use_sms = false;
 $hash = "SSHA";
 $pwd_min_length = 8;
 $pwd_max_length = 16;
@@ -62,7 +63,7 @@ EOH
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = [ "urlprefix-self-service-password.forge.henix.asipsante.fr" ]
+                tags = [ "urlprefix-self-service-password.forge.henix.asipsante.fr/" ]
 				port = "self-service-password"
                 check {
                     name     = "alive"
