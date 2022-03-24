@@ -17,7 +17,7 @@ job "self-service-password-forge" {
         }
 
         network {
-            port "self-service-password" { to = 80 }            
+            port "self-service-password" { to = 6000 }            
         }
 
         task "self-service-password" {
@@ -67,7 +67,7 @@ EOH
                 check {
                     name     = "alive"
                     type     = "http"
-                    path     = "/pwd"
+                    path     = "/"
                     interval = "30s"
                     timeout  = "5s"
                     port     = "self-service-password"
