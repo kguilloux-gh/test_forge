@@ -53,7 +53,7 @@ job "gitlab-forge" {
 					path     = "/gitlab"
                     interval = "30s"
                     timeout  = "5s"
-                    port     = "gitlab"
+                    port     = "gitlab-http"
                 }
             }
         } 
