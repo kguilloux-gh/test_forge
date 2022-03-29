@@ -39,7 +39,7 @@ job "gitlab-forge" {
                 volume_driver = "pxd"
             }
             resources {
-                cpu    = 1000
+                cpu    = 10000
                 memory = 16000
             }
             
@@ -54,6 +54,15 @@ job "gitlab-forge" {
                     interval = "30s"
                     timeout  = "5s"
                     port     = "gitlab"
+                }
+                port = "gitlab-https"
+                check {
+                    name     = "alive"
+                    type     = "https"
+					path     = "/gitlab"
+                    interval = "30s"
+                    timeout  = "5s"
+                    port     = "gitlab-https"
                 }
             }
         } 
