@@ -60,8 +60,9 @@ EXTERNAL_URL="http://gitlab.henix.asipsante.fr"
                     name     = "alive"
                     type     = "http"
 					path     = "/-/readiness?all=1"
-                    interval = "30s"
-                    timeout  = "5s"
+                    interval = "60s"
+                    timeout  = "10s"
+					failures_before_critical = 5
                     port     = "gitlab"
                 }
             }
