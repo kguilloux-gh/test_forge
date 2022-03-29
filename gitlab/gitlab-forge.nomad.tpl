@@ -67,7 +67,7 @@ gitlab_rails['ldap_servers'] = {
   'lowercase_usernames' => false,
   }
 }
-                EOH
+EOH
             }
 
             config {
