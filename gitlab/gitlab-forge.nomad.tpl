@@ -41,9 +41,8 @@ EXTERNAL_URL="http://gitlab.henix.asipsante.fr"
 
             template {
 			    destination = "secrets/gitlab.ans.rb"
-                data = <<EOH			
-
-EOH
+                data = <<EOH
+                EOH
             }
 
             config {
