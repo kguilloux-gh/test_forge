@@ -58,8 +58,7 @@ EXTERNAL_URL="http://gitlab.henix.asipsante.fr"
 				port = "gitlab"
                 check {
                     name     = "alive"
-                    type     = "http"
-					path     = "/-/readiness?all=1"
+                    type     = "tcp"
                     interval = "60s"
                     timeout  = "10s"
 					failures_before_critical = 5
