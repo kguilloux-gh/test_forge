@@ -44,29 +44,28 @@ EXTERNAL_URL="http://gitlab.henix.asipsante.fr"
                 data = <<EOH			
 gitlab_rails['ldap_enabled'] = true
 gitlab_rails['prevent_ldap_sign_in'] = false
-gitlab_rails['ldap_servers'] = {
-'main' => {
-  'label' => 'LDAP_ANS',
+gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
+main:
+  label: 'LDAP_ANS'
 {{ range service "ldap-forge" }}
-  'host' =>  '{{ .Address }}',
-  'port' => {{.Port}},
+  host: '{{ .Address }}'
+  port: {{.Port}}
 {{ end }}
+
+  uid: 'sAMAccountName'
+  encryption: 'simple_tls'
+  verify_certificates: false
 {{ with secret "forge/openldap" }}
-  'uid' => 'sAMAccountName',
-  'encryption' => 'simple_tls',
-  'verify_certificates' => false,
-  'bind_dn' => 'cn={{ .Data.data.admin_username }},{{ .Data.data.ldap_root }}',
-  'password' => '{{ .Data.data.admin_password }}',
-  'timeout' => 10,
-  'active_directory' => false,
-  'allow_username_or_email_login' => false,
-  'block_auto_created_users' => false,
-  'base' => '{{ .Data.data.ldap_root }}',
+  bind_dn: 'cn={{ .Data.data.admin_username }},{{ .Data.data.ldap_root }}'
+  password: '{{ .Data.data.admin_password }}'
+  timeout: 10
+  active_directory: false
+  allow_username_or_email_login: false
+  block_auto_created_users: false
+  base: '{{ .Data.data.ldap_root }}'
 {{ end }}
-  'user_filter' => '',
-  'lowercase_usernames' => false,
-  }
-}
+  lowercase_usernames: false
+'EOS'
 EOH
             }
 
