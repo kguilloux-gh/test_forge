@@ -32,7 +32,7 @@ job "gitlab-forge" {
 			
             template {
                 data = <<EOH
-EXTERNAL_URL="https://gitlab.example.com"
+EXTERNAL_URL="http://gitlab.henix.asipsante.fr"
                 EOH
                 destination = "secrets/file.env"
                 change_mode = "restart"
@@ -54,12 +54,12 @@ EXTERNAL_URL="https://gitlab.example.com"
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = ["urlprefix-/gitlab"]
+                tags = ["urlprefix-gitlab.henix.asipsante.fr"]
 				port = "gitlab"
                 check {
                     name     = "alive"
                     type     = "http"
-					path     = "/gitlab"
+					path     = "/-/readiness?all=1"
                     interval = "30s"
                     timeout  = "5s"
                     port     = "gitlab"
