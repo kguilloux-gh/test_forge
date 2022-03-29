@@ -49,7 +49,7 @@ job "gitlab-forge" {
 				port = "gitlab"
                 check {
                     name     = "alive"
-                    type     = "tcp"
+                    type     = "http"
 					path     = "/gitlab"
                     interval = "30s"
                     timeout  = "5s"
