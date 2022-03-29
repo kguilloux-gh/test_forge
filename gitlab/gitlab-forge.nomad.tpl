@@ -22,8 +22,8 @@ job "gitlab-forge" {
         }
 
         network {
-            port "gitlab" { to = 80 }
-            port "gitlab-ldap" { to = 443 }
+            port "gitlab-http" { to = 80 }
+            port "gitlab-https" { to = 443 }
             port "gitlab-ssh" { to = 22 }
         }
         
@@ -33,7 +33,7 @@ job "gitlab-forge" {
             config {
                 image   = "${image}:${tag}"
                 ports   = ["gitlab"]
-				volumes = ["name=forge-gitlab-data,io_priority=high,size=10,repl=2:/var/opt/gitlab",
+				volumes = ["name=forge-gitlab-data,io_priority=high,size=5,repl=2:/var/opt/gitlab",
 				           "name=forge-gitlab-logs,io_priority=high,size=2,repl=2:/var/log/gitlab",
 				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab"]
                 volume_driver = "pxd"
@@ -46,7 +46,7 @@ job "gitlab-forge" {
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
                 tags = ["urlprefix-/gitlab"]
-				port = "gitlab"
+				port = "gitlab-http"
                 check {
                     name     = "alive"
                     type     = "http"
