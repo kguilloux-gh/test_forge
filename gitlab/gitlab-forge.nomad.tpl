@@ -32,7 +32,7 @@ job "gitlab-forge" {
 
             config {
                 image   = "${image}:${tag}"
-                ports   = ["gitlab"]
+                ports   = ["gitlab", "gitlab-https", "gitlab-ssh"]
 				volumes = ["name=forge-gitlab-data,io_priority=high,size=5,repl=2:/var/opt/gitlab",
 				           "name=forge-gitlab-logs,io_priority=high,size=2,repl=2:/var/log/gitlab",
 				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab"]
@@ -54,15 +54,6 @@ job "gitlab-forge" {
                     interval = "30s"
                     timeout  = "5s"
                     port     = "gitlab"
-                }
-                port = "gitlab-https"
-                check {
-                    name     = "alive"
-                    type     = "https"
-					path     = "/gitlab"
-                    interval = "30s"
-                    timeout  = "5s"
-                    port     = "gitlab-https"
                 }
             }
         } 
