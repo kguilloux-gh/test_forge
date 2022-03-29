@@ -29,6 +29,15 @@ job "gitlab-forge" {
         
         task "gitlab" {
             driver = "docker"
+			
+            template {
+                data = <<EOH
+EXTERNAL_URL="https://gitlab.example.com"
+                EOH
+                destination = "secrets/file.env"
+                change_mode = "restart"
+                env = true
+            }
 
             config {
                 image   = "${image}:${tag}"
