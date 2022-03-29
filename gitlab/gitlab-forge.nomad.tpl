@@ -33,7 +33,7 @@ job "gitlab-forge" {
             config {
                 image   = "${image}:${tag}"
                 ports   = ["gitlab"]
-				volumes = ["name=forge-gitlab-data,io_priority=high,size=2,repl=2:/var/opt/gitlab",
+				volumes = ["name=forge-gitlab-data,io_priority=high,size=10,repl=2:/var/opt/gitlab",
 				           "name=forge-gitlab-logs,io_priority=high,size=2,repl=2:/var/log/gitlab",
 				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab"]
                 volume_driver = "pxd"
