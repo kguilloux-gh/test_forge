@@ -22,7 +22,7 @@ job "gitlab-forge" {
         }
 
         network {
-            port "gitlab-http" { to = 80 }
+            port "gitlab" { to = 80 }
             port "gitlab-https" { to = 443 }
             port "gitlab-ssh" { to = 22 }
         }
@@ -46,14 +46,14 @@ job "gitlab-forge" {
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
                 tags = ["urlprefix-/gitlab"]
-				port = "gitlab-http"
+				port = "gitlab"
                 check {
                     name     = "alive"
                     type     = "http"
 					path     = "/gitlab"
                     interval = "30s"
                     timeout  = "5s"
-                    port     = "gitlab-http"
+                    port     = "gitlab"
                 }
             }
         } 
