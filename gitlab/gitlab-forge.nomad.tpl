@@ -75,7 +75,7 @@ main:
 				volumes = ["name=forge-gitlab-data,io_priority=high,size=5,repl=2:/var/opt/gitlab",
 				           "name=forge-gitlab-logs,io_priority=high,size=2,repl=2:/var/log/gitlab",
 				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab",
-                           "secret/gitlab.ans.rb:/etc/gitlab/gitlab.rb"]
+                           "local/gitlab.ans.rb:/etc/gitlab/gitlab.rb"]
                 volume_driver = "pxd"
             }
             resources {
