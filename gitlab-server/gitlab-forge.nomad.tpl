@@ -39,6 +39,35 @@ EXTERNAL_URL="http://gitlab.henix.asipsante.fr"
                 env = true
             }
 
+            template {
+			    destination = "secrets/gitlab.ans.rb"
+                data = <<EOH
+gitlab_rails['ldap_enabled'] = true
+gitlab_rails['prevent_ldap_sign_in'] = false
+gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
+main:
+  label: 'LDAP_ANS'
+{{ range service "ldap-forge" }}
+  host: '{{ .Address }}'
+  port: {{.Port}}
+{{ end }}
+
+  uid: 'sAMAccountName'
+  encryption: 'simple_tls'
+  verify_certificates: false
+{{ with secret "forge/openldap" }}
+  bind_dn: 'cn={{ .Data.data.admin_username }},{{ .Data.data.ldap_root }}'
+  password: '{{ .Data.data.admin_password }}'
+  timeout: 10
+  active_directory: false
+  allow_username_or_email_login: false
+  block_auto_created_users: false
+  base: '{{ .Data.data.ldap_root }}'
+{{ end }}
+  lowercase_usernames: false
+'EOS'
+                EOH
+            }
 
 
             config {
@@ -46,7 +75,8 @@ EXTERNAL_URL="http://gitlab.henix.asipsante.fr"
                 ports   = ["gitlab", "gitlab-https", "gitlab-ssh"]
 				volumes = ["name=forge-gitlab-data,io_priority=high,size=5,repl=2:/var/opt/gitlab",
 				           "name=forge-gitlab-logs,io_priority=high,size=2,repl=2:/var/log/gitlab",
-				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab"]
+				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab",
+						   "local/gitlab.ans.rb:/etc/gitlab/gitlab.rb"]
                 volume_driver = "pxd"
             }
             resources {
