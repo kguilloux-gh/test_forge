@@ -44,14 +44,13 @@ EXTERNAL_URL="http://gitlab.henix.asipsante.fr"
                 data = <<EOH
 gitlab_rails['ldap_enabled'] = true
 gitlab_rails['prevent_ldap_sign_in'] = false
-gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
+gitlab_rails['ldap_servers'] = YAML.load <<EOS
 main:
   label: 'LDAP_ANS'
 {{ range service "ldap-forge" }}
   host: '{{ .Address }}'
   port: {{.Port}}
 {{ end }}
-
   uid: 'sAMAccountName'
   encryption: 'simple_tls'
   verify_certificates: false
