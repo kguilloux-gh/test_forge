@@ -30,14 +30,7 @@ job "gitlab-forge" {
         task "gitlab" {
             driver = "docker"
 			
-            template {
-                data = <<EOH
-EXTERNAL_URL="http://gitlab.henix.asipsante.fr"
-                EOH
-                destination = "secrets/file.env"
-                change_mode = "restart"
-                env = true
-            }
+
 
             template {
 			    destination = "secrets/gitlab.ans.rb"
