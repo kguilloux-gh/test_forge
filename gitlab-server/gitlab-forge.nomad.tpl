@@ -77,7 +77,6 @@ main:
 				           "name=forge-gitlab-logs,io_priority=high,size=2,repl=2:/var/log/gitlab",
 				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab",
 						   "secrets/gitlab.ans.rb:/etc/gitlab/gitlab.rb"]
-                volume_driver = "pxd"
             }
             resources {
                 cpu    = 10000
