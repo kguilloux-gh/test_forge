@@ -75,7 +75,7 @@ EOS
 				           "name=forge-gitlab-logs,io_priority=high,size=2,repl=2:/var/log/gitlab",
 				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab",
 						   "secrets/gitlab.ans.rb:/opt/gitlab/etc/gitlab.rb.template"]
-                volume_driver = "pxd"
+
 			}
 
             resources {
