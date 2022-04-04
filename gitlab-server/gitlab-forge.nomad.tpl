@@ -40,7 +40,7 @@ EXTERNAL_URL="http://gitlab.henix.asipsante.fr"
             }
 
             template {
-			    destination = "secrets/gitlab.ans.rb"
+			    destination = "secrets/gitlab.ans"
                 data = <<EOH
 print "test"
                 EOH
@@ -52,7 +52,7 @@ print "test"
 				volumes = ["name=forge-gitlab-data,io_priority=high,size=5,repl=2:/var/opt/gitlab",
 				           "name=forge-gitlab-logs,io_priority=high,size=2,repl=2:/var/log/gitlab",
 				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab",
-                           "secrets/gitlab.ans.rb:/opt/gitlab/etc/gitlab.rb.template"]
+                           "secrets/gitlab.ans:/opt/gitlab/etc/gitlab.rb.template"]
                 volume_driver = "pxd"
             }
             resources {
