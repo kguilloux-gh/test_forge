@@ -30,7 +30,7 @@ job "gitlab-forge" {
         task "gitlab" {
             driver = "docker"
 			
-        template {
+            template {
                 data = <<EOH
 EXTERNAL_URL="http://gitlab.henix.asipsante.fr"
                 EOH
@@ -78,11 +78,6 @@ EOS
 				    target = "/var/opt/gitlab"
                     source = "forge-gitlab-data"
                     readonly = false
-                    volume_options = {
-                        no_copy = false
-						      labels = {
-                                 foo = "bar"
-                              }
                         driver_config = {
                             name = "pxd"
                         }
