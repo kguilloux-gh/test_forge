@@ -51,7 +51,7 @@ main:
   host: '{{ .Address }}'
   port: {{.Port}}
 {{ end }}
-  uid: 'sAMAccountName'
+  uid: 'Manager'
   encryption: 'simple_tls'
   verify_certificates: false
 {{ with secret "forge/openldap" }}
