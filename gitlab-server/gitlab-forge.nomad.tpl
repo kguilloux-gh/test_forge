@@ -71,7 +71,7 @@ EOS
             config {
                 image   = "${image}:${tag}"
                 ports   = ["gitlab", "gitlab-https", "gitlab-ssh"]
-                volumes = ["secrets/gitlab.ans.rb:/opt/gitlab/etc/gitlab.rb.template"]
+
                 
 				mount {
                     type = "volume"
