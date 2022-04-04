@@ -73,7 +73,7 @@ EOS
                 ports   = ["gitlab", "gitlab-https", "gitlab-ssh"]
 				volumes = ["name=forge-gitlab-data,io_priority=high,size=5,repl=2,pxd:/var/opt/gitlab",
 				           "name=forge-gitlab-logs,io_priority=high,size=2,repl=2:/var/log/gitlab",
-				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab",
+				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab"]
                 volume_driver = "pxd"
 						   				
                 mount {
