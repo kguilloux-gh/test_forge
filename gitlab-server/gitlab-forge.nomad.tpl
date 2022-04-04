@@ -80,9 +80,9 @@ EOS
                     readonly = false
                     volume_options {
                         no_copy = false
-						volume = "io_priority=high,size=5,repl=2"
                         driver_config {
                             name = "pxd"
+							volume = "io_priority=high,size=5,repl=2"
                         }
                     }
                 }
