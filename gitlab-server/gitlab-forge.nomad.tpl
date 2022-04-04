@@ -79,10 +79,9 @@ EOS
                     source = "forge-gitlab-data"
                     readonly = false
                     volume_options {
-				        name = "io_priority=high,size=5,repl=2"
                         no_copy = false
                         driver_config {
-                            name = "pxd"
+                            name = "pxd,io_priority=high,size=5,repl=2"
                         }
                     }
                 }
