@@ -71,48 +71,16 @@ EOS
             config {
                 image   = "${image}:${tag}"
                 ports   = ["gitlab", "gitlab-https", "gitlab-ssh"]
-                volumes = ["secrets/gitlab.ans.rb:/opt/gitlab/etc/gitlab.rb.template"]
-                
-				mount {
-                    type = "volume"
-                    target = "/var/opt/gitlab"
-                    source = "forge-gitlab-data"
-                    readonly = false
-                    volume_options {
-					    io_priority = high
-						size = 5
-						repl = 2
-                        no_copy = false
-                        driver_config {
-                            name = "pxd"
-                        }
-                    }
-                }
+				volumes = ["name=forge-gitlab-data,io_priority=high,size=5,repl=2:/var/opt/gitlab",
+				           "name=forge-gitlab-logs,io_priority=high,size=2,repl=2:/var/log/gitlab",
+				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab"]
+                volume_driver = "pxd"
 				
                 mount {
                     type = "volume"
-                    target = "/var/log/gitlab"
-                    source = "forge-gitlab-logs"
-                    readonly = false
-                    volume_options {
-                        no_copy = false
-                        driver_config {
-                            name = "pxd"
-                        }
-                    }
-                }
-				
-                mount {
-			        type = "volume"
-				    target = "/etc/gitlab"
-                    source = "forge-gitlab-config"
-                    readonly = false
-                    volume_options {
-                        no_copy = false
-                        driver_config {
-                            name = "pxd"
-                        }
-                    }
+                    target = "secrets/gitlab.ans.rb"
+                    source = "/opt/gitlab/etc/gitlab.rb.template"
+                    readonly = true
                 }
 			}
 
