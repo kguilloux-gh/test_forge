@@ -73,22 +73,14 @@ EOS
                 ports   = ["gitlab", "gitlab-https", "gitlab-ssh"]
 				
                 mount {
-			        type = "volume"
+			        type = "bind"
 				    target = "/var/opt/gitlab"
                     source = "forge-gitlab-data"
                     readonly = false
-                    volume_options = {
-                        no_copy = false
-						labels {
-                            foo = "bar"
+                        bind_options {
+                            propagation = "rshared"
                         }
-                        driver_config {
-                            name = "pxd"
-							options {
-							    foo = "bar"
-						    }
-                        }
-                    }
+
                 }
 			}
 
