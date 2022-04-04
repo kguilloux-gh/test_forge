@@ -79,10 +79,10 @@ EOS
                     source = "forge-gitlab-data"
                     readonly = false
                     volume_options = {
-					    io_priority = "high"
-						size = 5
-						repl = 2
                         no_copy = false
+						      labels = {
+                                 foo = "bar"
+                              }
                         driver_config = {
                             name = "pxd"
                         }
