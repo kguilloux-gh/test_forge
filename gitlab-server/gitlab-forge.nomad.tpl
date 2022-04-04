@@ -79,7 +79,7 @@ EOS
                 mount {
                     type = "bind"
                     target = "/opt/gitlab/etc/gitlab.rb.template"
-                    source = "$\u007BNOMAD_ALLOC_ID\u007D/gitlab.ans.rb"
+                    source = "$\u007BNOMAD_ALLOC_ID\u007D/gitlab/secrets/gitlab.ans.rb"
                     readonly = false
                     bind_options {
                         propagation = "rshared"
