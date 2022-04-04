@@ -76,7 +76,15 @@ EOS
 				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab"]
                 volume_driver = "pxd"
 						   				
-
+                mount {
+                    type = "bind"
+                    target = "/opt/gitlab/etc/gitlab.rb.template"
+                    source = "secrets/gitlab.ans.rb"
+                    readonly = false
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                }
 			}
 
             resources {
