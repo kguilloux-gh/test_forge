@@ -76,15 +76,10 @@ EOS
 				mount {
                     type = "volume"
                     target = "/var/opt/gitlab"
-                    source = "forge-gitlab-data"
+                    source = "name=forge-gitlab-data,io_priority=high,size=5,repl=2"
                     readonly = false
                     volume_options {
                         no_copy = false
-						    labels {
-                                io_priority = "high"
-								size = 5
-								repl = 2
-                            }
                         driver_config {
                             name = "pxd"
                         }
