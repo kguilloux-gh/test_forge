@@ -78,7 +78,7 @@ EOS
 				target = "/var/opt/gitlab"
                 source = "forge-gitlab-data"
                 readonly = false
-                volume_options {
+                volume_options = {
                     no_copy = false
                     labels {
                     foo = "bar"
