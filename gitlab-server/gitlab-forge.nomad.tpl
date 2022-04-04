@@ -81,6 +81,9 @@ EOS
                     target = "/secrets/gitlab.ans.rb"
                     source = "/opt/gitlab/etc/gitlab.rb.template"
                     readonly = false
+					bind_options {
+                        propagation = "rshared"
+                    }
                 }
 			}
 
