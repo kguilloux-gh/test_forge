@@ -40,10 +40,31 @@ EXTERNAL_URL="http://gitlab.henix.asipsante.fr"
             }
 
             template {
-			    destination = "secrets/gitlab.ans"
+                destination = "secrets/config.inc.local.php"
                 data = <<EOH
-print "test"
-                EOH
+<?php
+# ANS configuration 
+{{ range service "ldap-forge" }}
+$ldap_url = "ldap://{{ .Address }}:{{.Port}}";
+{{ end }}
+{{ with secret "forge/openldap" }}
+$ldap_binddn = "cn=Manager,{{ .Data.data.ldap_root }}";
+$ldap_bindpw = '{{ .Data.data.admin_password }}';
+$ldap_base = "{{ .Data.data.ldap_root }}";
+{{ end }}
+$use_tokens = false;
+$use_sms = false;
+$hash = "SSHA";
+$pwd_min_length = 8;
+$pwd_max_length = 16;
+$pwd_min_lower = 1;
+$pwd_min_upper = 1;
+$pwd_min_digit = 1;
+$pwd_forbidden_chars = "?/{}][|`^~";
+$keyphrase = "anssecret";
+$background_image = "";
+?>
+EOH
             }
 
             config {
@@ -52,7 +73,7 @@ print "test"
 				volumes = ["name=forge-gitlab-data,io_priority=high,size=5,repl=2:/var/opt/gitlab",
 				           "name=forge-gitlab-logs,io_priority=high,size=2,repl=2:/var/log/gitlab",
 				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab",
-                           "secrets/gitlab.ans:/opt/gitlab/etc/gitlab.rb.template"]
+                           "secrets/config.inc.local.php:/opt/gitlab/etc/gitlab.rb.template"]
                 volume_driver = "pxd"
             }
             resources {
