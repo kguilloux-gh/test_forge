@@ -78,7 +78,7 @@ EOS
 				
                 mount {
                     type = "volume"
-                    target = "secrets/gitlab.ans.rb"
+                    target = "/secrets/gitlab.ans.rb"
                     source = "/opt/gitlab/etc/gitlab.rb.template"
                     readonly = true
                 }
