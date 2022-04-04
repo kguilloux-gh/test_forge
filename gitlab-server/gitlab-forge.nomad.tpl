@@ -77,10 +77,10 @@ EOS
                 volume_driver = "pxd"
 				
                 mount {
-                    type = "volume"
+                    type = "bind"
                     target = "/secrets/gitlab.ans.rb"
                     source = "/opt/gitlab/etc/gitlab.rb.template"
-                    readonly = true
+                    readonly = false
                 }
 			}
 
