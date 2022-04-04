@@ -71,11 +71,25 @@ EOS
             config {
                 image   = "${image}:${tag}"
                 ports   = ["gitlab", "gitlab-https", "gitlab-ssh"]
-				volumes = ["/var/lib/osd/mounts/forge-gitlab-data:/var/opt/gitlab",
-				           "/var/lib/osd/mounts/forge-gitlab-logs:/var/log/gitlab",
-				           "/var/lib/osd/mounts/forge-gitlab-config:/etc/gitlab",
-						   "secrets/gitlab.ans.rb:/opt/gitlab/etc/gitlab.rb.template"]
+				volumes = ["secrets/gitlab.ans.rb:/opt/gitlab/etc/gitlab.rb.template"]
             }
+            mounts = [{
+				target = "/var/opt/gitlab"
+                source = "forge-gitlab-data"
+                readonly = false
+                volume_options {
+                    no_copy = false
+                    labels {
+                    foo = "bar"
+                    }
+                    driver_config {
+                        name = "pxd"
+                        options = {
+                        foo = "bar"
+                        }
+                    }
+                }
+            }]
 
             resources {
                 cpu    = 10000
