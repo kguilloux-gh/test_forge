@@ -75,6 +75,7 @@ EOS
             }
             mounts = [
 			{
+			    type = "volume"
 				target = "/var/opt/gitlab"
                 source = "forge-gitlab-data"
                 readonly = false
