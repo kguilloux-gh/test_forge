@@ -71,7 +71,7 @@ EOS
             config {
                 image   = "${image}:${tag}"
                 ports   = ["gitlab", "gitlab-https", "gitlab-ssh"]
-
+                volumes = ["secrets/gitlab.ans.rb:/opt/gitlab/etc/gitlab.rb.template"]
                 
 				mount {
                     type = "volume"
@@ -79,6 +79,9 @@ EOS
                     source = "forge-gitlab-data"
                     readonly = false
                     volume_options {
+					    io_priority = high
+						size = 5
+						repl = 2
                         no_copy = false
                         driver_config {
                             name = "pxd"
