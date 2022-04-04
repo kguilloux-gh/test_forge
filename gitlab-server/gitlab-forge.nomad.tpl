@@ -82,7 +82,9 @@ EOS
                         no_copy = false
                         driver_config {
                             name = "pxd"
-							volume = "io_priority=high,size=5,repl=2"
+							options {
+							    volume = "io_priority=high,size=5,repl=2"
+							}
                         }
                     }
                 }
