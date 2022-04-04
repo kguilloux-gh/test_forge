@@ -80,10 +80,10 @@ EOS
                 readonly = false
                 volume_options = {
                     no_copy = false
-                    labels {
+                    labels = {
                     foo = "bar"
                     }
-                    driver_config {
+                    driver_config = {
                         name = "pxd"
                         options = {
                         foo = "bar"
