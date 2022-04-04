@@ -74,7 +74,17 @@ EOS
 				volumes = ["name=forge-gitlab-data,io_priority=high,size=5,repl=2,pxd:/var/opt/gitlab",
 				           "name=forge-gitlab-logs,io_priority=high,size=2,repl=2:/var/log/gitlab",
 				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab",
-						   "secrets/gitlab.ans.rb:/opt/gitlab/etc/gitlab.rb.template"]
+                volume_driver = "pxd"
+						   				
+                mount {
+                    type = "bind"
+                    target = "/opt/gitlab/etc/gitlab.rb.template"
+                    source = "$\u007BNOMAD_SECRETS_DIR\u007D/gitlab.ans.rb"
+                    readonly = false
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                }
 			}
 
             resources {
