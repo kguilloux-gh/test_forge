@@ -93,7 +93,7 @@ EOS
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = ["urlprefix-gitlab.henix.asipsante.fr"]
+                tags = ["urlprefix-gitlab.henix.asipsante.fr/"]
 				port = "gitlab"
                 check {
                     name     = "alive"
