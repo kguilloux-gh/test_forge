@@ -51,7 +51,7 @@ main:
   host: '{{ .Address }}'
   port: {{.Port}}
 {{ end }}
-  uid: 'sAMAccountName'
+  uid: 'uid'
   encryption: 'plain'
 {{ with secret "forge/openldap" }}
   bind_dn: 'cn={{ .Data.data.admin_username }},{{ .Data.data.ldap_root }}'
