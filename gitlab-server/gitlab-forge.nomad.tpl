@@ -52,17 +52,16 @@ main:
   port: {{.Port}}
 {{ end }}
   uid: 'sAMAccountName'
-  encryption: 'simple_tls'
-  verify_certificates: false
+  encryption: 'plain'
 {{ with secret "forge/openldap" }}
   bind_dn: 'cn={{ .Data.data.admin_username }},{{ .Data.data.ldap_root }}'
   password: '{{ .Data.data.admin_password }}'
-  timeout: 10
-  active_directory: false
-  allow_username_or_email_login: false
-  block_auto_created_users: false
   base: '{{ .Data.data.ldap_root }}'
 {{ end }}
+  timeout: 10
+  verify_certificates: false
+  active_directory: false
+  allow_username_or_email_login: false
   lowercase_usernames: false
 EOS
                 EOH
