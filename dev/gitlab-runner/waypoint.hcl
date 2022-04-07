@@ -1,4 +1,4 @@
-project = "forge/ldap"
+project = "forge/gitlab-runner"
 
 labels = { "domaine" = "forge" }
 
@@ -7,12 +7,12 @@ runner {
     data_source "git" {
         url  = "https://github.com/kguilloux-gh/test_forge.git"
         ref  = "main"
-		path = "openldap-server"
+		path = "dev/gitlab-runner"
 		ignore_changes_outside_path = true
     }
 }
 
-app "forge/ldap" {
+app "forge/gitlab" {
 
     build {
         use "docker-pull" {
@@ -24,7 +24,7 @@ app "forge/ldap" {
   
     deploy{
         use "nomad-jobspec" {
-            jobspec = templatefile("${path.app}/ldap-forge.nomad.tpl", {
+            jobspec = templatefile("${path.app}/gitlab-runner-forge.nomad.tpl", {
             image   = var.image
             tag     = var.tag
             datacenter = var.datacenter
@@ -40,10 +40,10 @@ variable "datacenter" {
 
 variable "image" {
     type    = string
-    default = "bitnami/openldap"
+    default = "gitlab/gitlab-runner"
 }
 
 variable "tag" {
     type    = string
-    default = "2.6"
+    default = "latest"
 }

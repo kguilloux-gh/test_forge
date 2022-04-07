@@ -1,4 +1,4 @@
-project = "forge/self-service-password"
+project = "forge/lam"
 
 labels = { "domaine" = "forge" }
 
@@ -7,12 +7,12 @@ runner {
     data_source "git" {
         url  = "https://github.com/kguilloux-gh/test_forge.git"
         ref  = "main"
-		path = "self-service-password"
+		path = "dev/lam"
 		ignore_changes_outside_path = true
     }
 }
 
-app "forge/self-service-password" {
+app "forge/lam" {
 
     build {
         use "docker-pull" {
@@ -24,7 +24,7 @@ app "forge/self-service-password" {
   
     deploy{
         use "nomad-jobspec" {
-            jobspec = templatefile("${path.app}/self-service-password-forge.nomad.tpl", {
+            jobspec = templatefile("${path.app}/lam-forge.nomad.tpl", {
             image   = var.image
             tag     = var.tag
             datacenter = var.datacenter
@@ -40,7 +40,7 @@ variable "datacenter" {
 
 variable "image" {
     type    = string
-    default = "ltbproject/self-service-password"
+    default = "ldapaccountmanager/lam"
 }
 
 variable "tag" {
