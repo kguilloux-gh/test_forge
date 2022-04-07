@@ -33,7 +33,7 @@ job "gitlab-runner-forge" {
                 image   = "${image}:${tag}"
                 ports   = ["gitlab-runner"]
 				volumes = ["/var/run/docker.sock:/var/run/docker.sock",
-				            "name=forge-docker-machine-config,io_priority=high,size=2,repl=2:/etc/gitlab-runner"]
+				            "name=forge-docker-machine-config:/root/.docker/machine"]
             }
             resources {
                 cpu    = 1000
