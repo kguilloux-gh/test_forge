@@ -49,7 +49,7 @@ gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
 main:
   label: 'LDAP_ANS'
 {{ range service "ldap-forge" }}
-  host: '10.3.8.10'
+  host: '{{ .Address }}'
   port: {{.Port}}
 {{ end }}
   uid: 'uid'
