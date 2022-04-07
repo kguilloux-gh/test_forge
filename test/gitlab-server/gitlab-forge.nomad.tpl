@@ -83,7 +83,6 @@ EOS
                     readonly = false
                     bind_options {
                         propagation = "rshared"
-						consistency = "consistent"
                     }
                 }
 			}
