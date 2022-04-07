@@ -49,7 +49,7 @@ gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
 main:
   label: 'LDAP_ANS'
 {{ range service "ldap-forge" }}
-  host: '10.3.9.10'
+  host: '{{ .Address }}'
   port: {{.Port}}
 {{ end }}
   uid: 'uid'
@@ -78,7 +78,7 @@ EOS
 						   				
                 mount {
                     type = "bind"
-                    target = "/etc/gitlab/gitlab.rb"
+                    target = "/opt/gitlab/etc/gitlab.rb.template"
                     source = "secrets/gitlab.ans.rb"
                     readonly = false
                     bind_options {
