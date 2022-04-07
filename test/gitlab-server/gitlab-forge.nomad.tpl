@@ -78,7 +78,7 @@ EOS
 						   				
                 mount {
                     type = "bind"
-                    target = "/opt/gitlab/etc/gitlab.rb.template"
+                    target = "/etc/gitlab/gitlab.rb"
                     source = "secrets/gitlab.ans.rb"
                     readonly = false
                     bind_options {
