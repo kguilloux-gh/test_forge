@@ -41,6 +41,7 @@ EXTERNAL_URL="http://gitlab.henix.asipsante.fr"
 
             template {
 			    destination = "secrets/gitlab.ans.rb"
+				change_mode = "restart"
                 data = <<EOH
 gitlab_rails['ldap_enabled'] = true
 gitlab_rails['prevent_ldap_sign_in'] = false
