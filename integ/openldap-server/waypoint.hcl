@@ -1,4 +1,4 @@
-project = "forge/ldap"
+project = "forge/openldap"
 
 labels = { "domaine" = "forge" }
 
@@ -12,7 +12,7 @@ runner {
     }
 }
 
-app "forge/ldap" {
+app "forge/openldap" {
 
     build {
         use "docker-pull" {
