@@ -72,6 +72,8 @@ EOS
             }
 
             config {
+			    command = "sh"
+                args = ["rm -rf /etc/gitlab/gitlab.rb"]
                 image   = "${image}:${tag}"
                 ports   = ["gitlab", "gitlab-https", "gitlab-ssh"]
 				volumes = ["name=forge-gitlab-data,io_priority=high,size=5,repl=2:/var/opt/gitlab",
