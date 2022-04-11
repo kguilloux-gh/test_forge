@@ -43,6 +43,9 @@ EXTERNAL_URL="http://gitlab.henix.asipsante.fr"
 			    destination = "secrets/gitlab.ans.rb"
 				change_mode = "restart"
                 data = <<EOH
+{{ with secret "forge/gitlab" }}
+gitlab_rails['initial_root_password'] = '{{ .Data.data.root_password }}'
+{{ end }}
 gitlab_rails['ldap_enabled'] = true
 gitlab_rails['prevent_ldap_sign_in'] = false
 gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
