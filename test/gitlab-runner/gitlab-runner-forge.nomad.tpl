@@ -29,16 +29,33 @@ job "gitlab-runner-forge" {
             driver = "docker"
 
             template {
-                change_mode = "noop"
+                change_mode = "restart"
                 destination = "local/gitlab-runner-config.toml"
-                data = var.config
+                data = <<EOH
+concurrent = 2
+check_interval = 0
+
+[session_server]
+  session_timeout = 1800
+  
+[[runners]]
+  name = "ruby-2.7-docker"
+  url = "https://CI/"
+  token = "TOKEN"
+  limit = 0
+  executor = "docker"
+  builds_dir = ""
+  shell = ""
+  environment = ["ENV=value", "LC_ALL=en_US.UTF-8"]
+  clone_url = "http://gitlab.example.local"
+EOH
             }
 
             config {
                 image   = "${image}:${tag}"
                 ports   = ["gitlab-runner"]
 				volumes = ["/var/run/docker.sock:/var/run/docker.sock",
-				            "local/gitlab-runner-config.toml:/etc/gitlab-runner/config.toml"]
+                           "local/gitlab-runner-config.toml:/etc/gitlab-runner/config.toml"]
             }
             resources {
                 cpu    = 1000

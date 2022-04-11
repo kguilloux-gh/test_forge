@@ -47,7 +47,3 @@ variable "tag" {
     type    = string
     default = "latest"
 }
-
-variable "config" {
-    type    = string
-}
