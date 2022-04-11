@@ -28,12 +28,17 @@ job "gitlab-runner-forge" {
         task "gitlab-runner" {
             driver = "docker"
 
-			
+            template {
+                change_mode = "noop"
+                destination = "local/gitlab-runner-config.toml"
+                data = var.config
+            }
+
             config {
                 image   = "${image}:${tag}"
                 ports   = ["gitlab-runner"]
 				volumes = ["/var/run/docker.sock:/var/run/docker.sock",
-				            "name=forge-docker-machine-config:/root/.docker/machine"]
+				            "local/gitlab-runner-config.toml:/etc/gitlab-runner/config.toml"]
             }
             resources {
                 cpu    = 1000
