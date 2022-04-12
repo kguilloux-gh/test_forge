@@ -61,6 +61,40 @@ job "gitlab-forge" {
 			}
 		}
 		
+		task "post-config" {
+			driver = "docker"			
+		    config {
+				image = "busybox:latest"
+				mount {
+				    type = "volume"
+				    target = "/etc/gitlab"
+				    source = "forge-gitlab-config"
+				    readonly = false
+				    volume_options {
+				        no_copy = false
+					    driver_config {
+					        name = "pxd"
+					        options {
+                                io_priority = "high"
+                                size = 10
+                                repl = 2
+					        }
+					    }   
+				    }
+				}
+				command = "sh"
+				args = ["-c", "rm -f /etc/gitlab/gitlab.rb"]
+			}
+			resources {
+				cpu = 100
+				memory = 64
+			}
+			lifecycle {
+				hook = "poststop"
+				sidecar = "false"
+			}
+		}
+		
         task "gitlab" {
             driver = "docker"
 			
