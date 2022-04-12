@@ -50,7 +50,5 @@ variable "tag" {
 
 variable "external_url" {
     type    = string
-	{{ with secret "forge/gitlab" }}
-        default = "{{.Data.data.external_url}}"
-	{{ end }}
+    default = "gitlab.henix.asipsante.fr"
 }
