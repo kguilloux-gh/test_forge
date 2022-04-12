@@ -66,7 +66,7 @@ job "gitlab-forge" {
 			
             template {
                 data = <<EOH
-EXTERNAL_URL="https://var.external_url"
+EXTERNAL_URL="https://${external_url}"
                 EOH
                 destination = "secrets/file.env"
                 change_mode = "restart"
@@ -131,7 +131,7 @@ EOS
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = ["urlprefix-var.external_url/"]
+                tags = ["urlprefix-${external_url}/"]
 				port = "gitlab"
                 check {
                     name     = "alive"
