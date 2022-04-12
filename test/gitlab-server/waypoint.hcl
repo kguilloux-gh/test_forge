@@ -28,6 +28,7 @@ app "forge/gitlab" {
             image   = var.image
             tag     = var.tag
             datacenter = var.datacenter
+			external_url_gitlab = var.external_url_gitlab
             })
         }
     }
