@@ -29,6 +29,7 @@ app "forge/gitlab" {
             tag     = var.tag
             datacenter = var.datacenter
 			external_url_gitlab = var.external_url_gitlab
+			external_url_protocole_gitlab = var.external_url_protocole_gitlab
             })
         }
     }
@@ -52,4 +53,9 @@ variable "tag" {
 variable "external_url_gitlab" {
     type    = string
     default = "test"
+}
+
+variable "external_url_protocole_gitlab" {
+    type    = string
+    default = "https"
 }
