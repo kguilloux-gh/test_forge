@@ -60,41 +60,7 @@ job "gitlab-forge" {
 				sidecar = "false"
 			}
 		}
-		
-		task "post-config" {
-			driver = "docker"			
-		    config {
-				image = "busybox:latest"
-				mount {
-				    type = "volume"
-				    target = "/etc/gitlab"
-				    source = "forge-gitlab-config"
-				    readonly = false
-				    volume_options {
-				        no_copy = false
-					    driver_config {
-					        name = "pxd"
-					        options {
-                                io_priority = "high"
-                                size = 10
-                                repl = 2
-					        }
-					    }   
-				    }
-				}
-				command = "sh"
-				args = ["-c", "rm -f /etc/gitlab/gitlab.rb"]
-			}
-			resources {
-				cpu = 100
-				memory = 64
-			}
-			lifecycle {
-				hook = "poststop"
-				sidecar = "false"
-			}
-		}
-		
+
         task "gitlab" {
             driver = "docker"
 			
@@ -119,9 +85,9 @@ gitlab_rails['prevent_ldap_sign_in'] = false
 gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
 main:
   label: 'LDAP_ANS'
-{{ range service "ldap-forge" }}
-  host: '{{ .Address }}'
-  port: {{.Port}}
+{{ with secret "forge/gitlab" }}
+  host: '{{ .Data.data.ldap_address }}'
+  port: {{.Data.data.ldap_port}}
 {{ end }}
   uid: 'uid'
   encryption: 'plain'
