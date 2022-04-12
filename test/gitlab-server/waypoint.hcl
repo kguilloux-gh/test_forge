@@ -47,3 +47,10 @@ variable "tag" {
     type    = string
     default = "latest"
 }
+
+variable "external_url" {
+    type    = string
+	{{ with secret "forge/gitlab" }}
+        default = "{{.Data.data.external_url}}"
+	{{ end }}
+}
