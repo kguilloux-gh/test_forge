@@ -48,7 +48,7 @@ variable "tag" {
     default = "latest"
 }
 
-variable "external_url" {
+variable "external_url_gitlab" {
     type    = string
     default = "gitlab.henix.asipsante.fr"
 }
