@@ -36,7 +36,7 @@ app "forge/gitlab" {
 
 variable "datacenter" {
     type    = string
-    default = "henix_docker_platform_test"
+    default = "test"
 }
 
 variable "image" {
@@ -51,5 +51,5 @@ variable "tag" {
 
 variable "external_url_gitlab" {
     type    = string
-    default = "gitlab.henix.asipsante.fr"
+    default = "test"
 }
