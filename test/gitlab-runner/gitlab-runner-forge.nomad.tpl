@@ -28,30 +28,11 @@ job "gitlab-runner-forge" {
         task "gitlab-runner" {
             driver = "docker"
 
-            template {
-                change_mode = "restart"
-                destination = "local/gitlab-runner-config.toml"
-                data = <<EOH
-concurrent = 2
-check_interval = 0
-
-[session_server]
-  session_timeout = 1800
-  
-[[runners]]
-  name = "java"
-  url = "http://gitlab.henix.asipsante.fr/"
-  token = "TOKEN"
-  limit = 0
-  executor = "docker"
-EOH
-            }
-
             config {
                 image   = "${image}:${tag}"
                 ports   = ["gitlab-runner"]
 				volumes = ["/var/run/docker.sock:/var/run/docker.sock",
-                           "local/gitlab-runner-config.toml:/etc/gitlab-runner/config.toml"]
+                           "gitlab-runner-config:/etc/gitlab-runner"]
             }
             resources {
                 cpu    = 1000
