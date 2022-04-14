@@ -39,15 +39,11 @@ check_interval = 0
   session_timeout = 1800
   
 [[runners]]
-  name = "ruby-2.7-docker"
-  url = "https://CI/"
+  name = "java"
+  url = "http://gitlab.henix.asipsante.fr/"
   token = "TOKEN"
   limit = 0
   executor = "docker"
-  builds_dir = ""
-  shell = ""
-  environment = ["ENV=value", "LC_ALL=en_US.UTF-8"]
-  clone_url = "http://gitlab.example.local"
 EOH
             }
 
