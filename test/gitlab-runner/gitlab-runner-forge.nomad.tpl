@@ -33,9 +33,7 @@ job "gitlab-runner-forge" {
                 ports   = ["gitlab-runner"]
 				volumes = ["name=gitlab-runner-config:/etc/gitlab-runner"]
 				volume_driver = "pxd"
-            }
-
-            mount {
+                mount {
                     type = "bind"
                     target = "/var/run/docker.sock"
                     source = "/var/run/docker.sock"
@@ -43,7 +41,8 @@ job "gitlab-runner-forge" {
                     bind_options {
                         propagation = "rshared"
                     }
-            }
+                }
+			}
 			
             resources {
                 cpu    = 1000
