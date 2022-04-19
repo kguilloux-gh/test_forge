@@ -30,12 +30,22 @@ job "gitlab-runner-forge" {
 
             config {
 
+                template {
+                    data = <<EOH
+[session_server]
+  listen_address = "0.0.0.0:8093"
+EOH
+                    destination = "secrets/test-config.template.toml"
+                    change_mode = "restart"
+                }
+
                 image   = "${image}:${tag}"
                 ports   = ["gitlab-runner"]
+
                 command = "register"
                 args = [
-                    "--listen-address",
-                    "0.0.0.0:8093",
+                    "--template-config",
+                    "/local/test-config.template.toml"
                     "--non-interactive",
                     "--executor",
                     "docker",
@@ -51,6 +61,7 @@ job "gitlab-runner-forge" {
                     "--locked=false",
                     "--access-level=not_protected"
                 ]
+
                 mount {
                     type = "volume"
                     target = "/etc/gitlab-runner"
@@ -88,7 +99,8 @@ job "gitlab-runner-forge" {
                 cpu    = 1000
                 memory = 1024
             }
-        } 
+        }
+
         task "gitlab-runner" {
             driver = "docker"
 
