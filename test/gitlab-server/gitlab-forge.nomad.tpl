@@ -26,40 +26,7 @@ job "gitlab-forge" {
             port "gitlab-https" { to = 443 }
             port "gitlab-ssh" { to = 22 }
         }
-        
-        task "prep-config" {
-			driver = "docker"			
-		    config {
-				image = "busybox:latest"
-				mount {
-				    type = "volume"
-				    target = "/etc/gitlab"
-				    source = "forge-gitlab-config"
-				    readonly = false
-				    volume_options {
-				        no_copy = false
-					    driver_config {
-					        name = "pxd"
-					        options {
-                                io_priority = "high"
-                                size = 10
-                                repl = 2
-					        }
-					    }   
-				    }
-				}
-				command = "sh"
-				args = ["-c", "rm -f /etc/gitlab/gitlab.rb"]
-			}
-			resources {
-				cpu = 100
-				memory = 64
-			}
-			lifecycle {
-				hook = "prestart"
-				sidecar = "false"
-			}
-		}
+
         task "prep-config" {
 			driver = "docker"
 			
