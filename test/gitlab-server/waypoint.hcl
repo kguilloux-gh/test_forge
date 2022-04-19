@@ -28,8 +28,8 @@ app "forge/gitlab" {
             image   = var.image
             tag     = var.tag
             datacenter = var.datacenter
-            external_url_gitlab = var.external_url_gitlab
-            external_url_protocole_gitlab = var.external_url_protocole_gitlab
+            external_url_gitlab_hostname = var.external_url_gitlab_hostname
+            external_url_gitlab_protocole = var.external_url_gitlab_protocole
             })
         }
     }
@@ -50,12 +50,12 @@ variable "tag" {
     default = "latest"
 }
 
-variable "external_url_gitlab" {
+variable "external_url_gitlab_hostname" {
     type    = string
     default = "test"
 }
 
-variable "external_url_protocole_gitlab" {
+variable "external_url_gitlab_protocole" {
     type    = string
     default = "https"
 }

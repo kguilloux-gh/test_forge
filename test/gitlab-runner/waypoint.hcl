@@ -28,9 +28,8 @@ app "forge/gitlab-runner" {
             image   = var.image
             tag     = var.tag
             datacenter = var.datacenter
-            external_url_gitlab = var.external_url_gitlab
-            external_url_protocole_gitlab = var.external_url_protocole_gitlab
-            token_gitlab-runner = var.token_gitlab-runner
+            external_url_gitlab_hostname = var.external_url_gitlab_hostname
+            external_url_gitlab_protocole = var.external_url_gitlab_protocole
             })
         }
     }
@@ -51,17 +50,12 @@ variable "tag" {
     default = "latest"
 }
 
-variable "external_url_gitlab" {
+variable "external_url_gitlab_hostname" {
     type    = string
     default = "test"
 }
 
-variable "external_url_protocole_gitlab" {
+variable "external_url_gitlab_protocole" {
     type    = string
     default = "https"
-}
-
-variable "token_gitlab-runner" {
-    type    = string
-    default = "test"
 }

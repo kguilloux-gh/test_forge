@@ -29,12 +29,15 @@ job "gitlab-runner-forge" {
             driver = "docker"
 
             template {
-                data = <<EOH
-[session_server]
-  listen_address = "0.0.0.0:8093"
+
+            data = <<EOH
+{{ with secret "forge/gitlab-runner" }}
+TOKEN_GITLAB_RUNNER="{{ .Data.data.token_gitlab-runner }}"
+{{ end }}
 EOH
-                destination = "secrets/test-config.template.toml"
+                destination = "secrets/gitlab-runner.env"
                 change_mode = "restart"
+                env = true
             }
 
             config {
@@ -52,9 +55,9 @@ EOH
                     "--docker-image",
                     "maven",
                     "--url",
-                    "${external_url_protocole_gitlab}://${external_url_gitlab}",
+                    "${external_url_gitlab_protocole}://${external_url_gitlab_hostname}",
                     "--registration-token",
-                    "${token_gitlab-runner}",
+                    "${TOKEN_GITLAB_RUNNER}",
                     "--description",
                     "runner docker java",
                     "--run-untagged=true",
