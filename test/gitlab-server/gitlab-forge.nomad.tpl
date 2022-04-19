@@ -86,9 +86,9 @@ gitlab_rails['prevent_ldap_sign_in'] = false
 gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
 main:
   label: 'LDAP_ANS'
-{{ with secret "forge/gitlab" }}
-  host: '{{ .Data.data.ldap_address }}'
-  port: {{.Data.data.ldap_port}}
+{{ range service "ldap-forge" }}
+  host: '{{ .Address }}'
+  port: {{ .Port }}
 {{ end }}
   uid: 'uid'
   encryption: 'plain'
