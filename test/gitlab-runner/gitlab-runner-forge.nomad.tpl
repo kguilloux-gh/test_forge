@@ -28,9 +28,28 @@ job "gitlab-runner-forge" {
         task "gitlab-autoregistered" {
             driver = "docker"
 
+
             config {
+
                 image   = "${image}:${tag}"
                 ports   = ["gitlab-runner"]
+                command = "register"
+                args = [
+                    "--non-interactive",
+                    "--executor",
+                    "docker",
+                    "--docker-image",
+                    "maven",
+                    "--url",
+                    "${external_url_protocole_gitlab}://${external_url_gitlab}",
+                    "--registration-token",
+                    "${token_gitlab-runner}",
+                    "--description",
+                    "runner docker java",
+                    "--run-untagged=true",
+                    "--locked=false",
+                    "--access-level=not_protected"
+                ]
                 mount {
                     type = "volume"
                     target = "/etc/gitlab-runner"
