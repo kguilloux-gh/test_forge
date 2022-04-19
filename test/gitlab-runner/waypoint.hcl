@@ -56,6 +56,11 @@ variable "external_url_gitlab" {
     default = "test"
 }
 
+variable "external_url_protocole_gitlab" {
+    type    = string
+    default = "https"
+}
+
 variable "token_gitlab-runner" {
     type    = string
     default = "test"
