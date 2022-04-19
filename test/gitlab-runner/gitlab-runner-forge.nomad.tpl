@@ -28,16 +28,16 @@ job "gitlab-runner-forge" {
         task "gitlab-autoregistered" {
             driver = "docker"
 
-            config {
-
-                template {
-                    data = <<EOH
+            template {
+                data = <<EOH
 [session_server]
   listen_address = "0.0.0.0:8093"
 EOH
-                    destination = "secrets/test-config.template.toml"
-                    change_mode = "restart"
-                }
+                destination = "secrets/test-config.template.toml"
+                change_mode = "restart"
+            }
+
+            config {
 
                 image   = "${image}:${tag}"
                 ports   = ["gitlab-runner"]
