@@ -60,6 +60,40 @@ job "gitlab-forge" {
 				sidecar = "false"
 			}
 		}
+        task "prep-config" {
+			driver = "docker"
+			
+		    config {
+				image = "busybox:latest"
+				mount {
+				  type = "volume"
+				  target = "/etc/gitlab"
+				  source = "forge-gitlab-config"
+				  readonly = false
+				  volume_options {
+					no_copy = false
+					driver_config {
+					  name = "pxd"
+					  options {
+						io_priority = "high"
+						size = 10
+						repl = 2
+					  }
+					}
+				  }
+				}
+				command = "sh"
+				args = ["-c", "ln -sf /secrets/gitlab.ans.rb /etc/gitlab/gitlab.rb"]
+			}
+			resources {
+				cpu = 100
+				memory = 64
+			}
+			lifecycle {
+				hook = "prestart"
+				sidecar = "false"
+			}
+		}
 
         task "gitlab" {
             driver = "docker"
@@ -112,16 +146,6 @@ EOS
 				           "name=forge-gitlab-logs,io_priority=high,size=2,repl=2:/var/log/gitlab",
 				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab"]
                 volume_driver = "pxd"
-						   				
-                mount {
-                    type = "bind"
-                    target = "/opt/gitlab/etc/gitlab.rb.template"
-                    source = "secrets/gitlab.ans.rb"
-                    readonly = false
-                    bind_options {
-                        propagation = "rshared"
-                    }
-                }
 			}
 
             resources {
