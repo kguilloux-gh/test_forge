@@ -55,7 +55,7 @@ EOH
                     "--url",
                     "${external_url_gitlab_protocole}://${external_url_gitlab_hostname}",
                     "--registration-token",
-                    "$TOKEN_GITLAB_RUNNER",
+                    "$\u007BTOKEN_GITLAB_RUNNER\u007D",
                     "--description",
                     "runner docker java",
                     "--run-untagged=true",
