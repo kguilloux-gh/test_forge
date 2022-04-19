@@ -34,6 +34,8 @@ job "gitlab-runner-forge" {
                 ports   = ["gitlab-runner"]
                 command = "register"
                 args = [
+                    "--listen-address",
+                    "0.0.0.0:8093",
                     "--non-interactive",
                     "--executor",
                     "docker",
