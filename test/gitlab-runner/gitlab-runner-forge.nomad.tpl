@@ -32,7 +32,7 @@ job "gitlab-runner-forge" {
 
             data = <<EOH
 {{ with secret "forge/gitlab-runner" }}
-TOKEN_GITLAB_RUNNER="{{ .Data.data.token_gitlab-runner }}"
+TOKEN_GITLAB_RUNNER="{{ .Data.data.token_gitlab_runner }}"
 {{ end }}
 EOH
                 destination = "secrets/gitlab-runner.env"
