@@ -7,8 +7,8 @@ runner {
     data_source "git" {
         url  = "https://github.com/kguilloux-gh/test_forge.git"
         ref  = "main"
-		path = "test/gitlab-server"
-		ignore_changes_outside_path = true
+        path = "test/gitlab-server"
+        ignore_changes_outside_path = true
     }
 }
 
@@ -18,7 +18,7 @@ app "forge/gitlab" {
         use "docker-pull" {
             image = var.image
             tag   = var.tag
-	        disable_entrypoint = true
+            disable_entrypoint = true
         }
     }
   
@@ -28,8 +28,8 @@ app "forge/gitlab" {
             image   = var.image
             tag     = var.tag
             datacenter = var.datacenter
-			external_url_gitlab = var.external_url_gitlab
-			external_url_protocole_gitlab = var.external_url_protocole_gitlab
+            external_url_gitlab = var.external_url_gitlab
+            external_url_protocole_gitlab = var.external_url_protocole_gitlab
             })
         }
     }

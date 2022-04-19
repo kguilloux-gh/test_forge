@@ -1,12 +1,12 @@
 job "gitlab-forge" {
     datacenters = ["${datacenter}"]
-	type = "service"
+    type = "service"
 
     vault {
         policies = ["forge"]
         change_mode = "restart"
     }
-    group "gitlab-server" {    
+    group "gitlab-server" {
         count ="1"
         
         restart {
@@ -28,55 +28,55 @@ job "gitlab-forge" {
         }
 
         task "prep-config" {
-			driver = "docker"
-			
-		    config {
-				image = "busybox:latest"
-				mount {
-				  type = "volume"
-				  target = "/etc/gitlab"
-				  source = "forge-gitlab-config"
-				  readonly = false
-				  volume_options {
-					no_copy = false
-					driver_config {
-					  name = "pxd"
-					  options {
-						io_priority = "high"
-						size = 10
-						repl = 2
-					  }
-					}
-				  }
-				}
-				command = "sh"
-				args = ["-c", "ln -sf /secrets/gitlab.ans.rb /etc/gitlab/gitlab.rb"]
-			}
-			resources {
-				cpu = 100
-				memory = 64
-			}
-			lifecycle {
-				hook = "prestart"
-				sidecar = "false"
-			}
-		}
+            driver = "docker"
+
+            config {
+                image = "busybox:latest"
+                mount {
+                    type = "volume"
+                    target = "/etc/gitlab"
+                    source = "forge-gitlab-config"
+                    readonly = false
+                    volume_options {
+                        no_copy = false
+                        driver_config {
+                            name = "pxd"
+                            options {
+                                io_priority = "high"
+                                size = 10
+                                repl = 2
+                            }
+                        }
+                    }
+                }
+                command = "sh"
+                args = ["-c", "ln -sf /secrets/gitlab.ans.rb /etc/gitlab/gitlab.rb"]
+            }
+            resources {
+                cpu = 100
+                memory = 64
+            }
+            lifecycle {
+                hook = "prestart"
+                sidecar = "false"
+            }
+        }
 
         task "gitlab" {
             driver = "docker"
-			
+
             template {
                 data = <<EOH
 EXTERNAL_URL="${external_url_protocole_gitlab}://${external_url_gitlab}"
-                EOH
+EOH
                 destination = "secrets/file.env"
                 change_mode = "restart"
                 env = true
             }
 
             template {
-			    destination = "secrets/gitlab.ans.rb"
-				change_mode = "restart"
+                destination = "secrets/gitlab.ans.rb"
+                change_mode = "restart"
                 data = <<EOH
 {{ with secret "forge/gitlab" }}
 gitlab_rails['initial_root_password'] = '{{ .Data.data.root_password }}'
@@ -109,11 +109,11 @@ EOS
             config {
                 image   = "${image}:${tag}"
                 ports   = ["gitlab", "gitlab-https", "gitlab-ssh"]
-				volumes = ["name=forge-gitlab-data,io_priority=high,size=5,repl=2:/var/opt/gitlab",
-				           "name=forge-gitlab-logs,io_priority=high,size=2,repl=2:/var/log/gitlab",
-				           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab"]
+                volumes = ["name=forge-gitlab-data,io_priority=high,size=5,repl=2:/var/opt/gitlab",
+                           "name=forge-gitlab-logs,io_priority=high,size=2,repl=2:/var/log/gitlab",
+                           "name=forge-gitlab-config,io_priority=high,size=2,repl=2:/etc/gitlab"]
                 volume_driver = "pxd"
-			}
+            }
 
             resources {
                 cpu    = 10000
@@ -123,13 +123,13 @@ EOS
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
                 tags = ["urlprefix-${external_url_gitlab}/"]
-				port = "gitlab"
+                port = "gitlab"
                 check {
                     name     = "alive"
                     type     = "tcp"
                     interval = "60s"
                     timeout  = "10s"
-					failures_before_critical = 5
+                    failures_before_critical = 5
                     port     = "gitlab"
                 }
             }
