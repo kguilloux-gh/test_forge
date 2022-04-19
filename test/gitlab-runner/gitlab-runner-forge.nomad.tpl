@@ -45,7 +45,7 @@ EOH
                 command = "register"
                 args = [
                     "--template-config",
-                    "/local/test-config.template.toml"
+                    "/local/test-config.template.toml",
                     "--non-interactive",
                     "--executor",
                     "docker",
