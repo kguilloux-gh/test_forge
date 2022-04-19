@@ -32,7 +32,7 @@ job "gitlab-runner-forge" {
                 image   = "${image}:${tag}"
                 ports   = ["gitlab-runner"]
                 command = "register"
-                args [
+                args = [
                     "--non-interactive",
                     "--executor",
                     "docker",
