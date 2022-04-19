@@ -21,11 +21,7 @@ job "gitlab-runner-forge" {
             value     = "data"
         }
 
-        network {
-            port "gitlab-runner" { to = 8093 }
-        }
-
-        task "gitlab-register" {
+        task "gitlab-autoregistered" {
             driver = "docker"
 
             config {
@@ -66,42 +62,6 @@ job "gitlab-runner-forge" {
                         }
                     }
                 }
-            }
-
-            resources {
-                cpu    = 1000
-                memory = 1024
-            }
-
-            lifecycle {
-                hook = "prestart"
-                sidecar = "false"
-            }
-        } 
- 
-        task "gitlab-runner" {
-            driver = "docker"
-
-            config {
-                image   = "${image}:${tag}"
-                ports   = ["gitlab-runner"]
-                mount {
-                    type = "volume"
-                    target = "/etc/gitlab-runner"
-                    source = "gitlab-runner-config"
-                    readonly = false
-                    volume_options {
-                        no_copy = false
-                        driver_config {
-                            name = "pxd"
-                            options {
-                                io_priority = "high"
-                                size = 1
-                                repl = 2
-                            }
-                        }
-                    }
-                }
 
                 mount {
                     type = "bind"
@@ -117,19 +77,6 @@ job "gitlab-runner-forge" {
             resources {
                 cpu    = 1000
                 memory = 1024
-            }
-            
-            service {
-                name = "$\u007BNOMAD_JOB_NAME\u007D"
-                port = "gitlab-runner"
-                check {
-                    name     = "alive"
-                    type     = "tcp"
-                    interval = "60s"
-                    timeout  = "10s"
-                    failures_before_critical = 5
-                    port     = "gitlab-runner"
-                }
             }
         } 
     }

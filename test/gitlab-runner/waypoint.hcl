@@ -12,7 +12,7 @@ runner {
     }
 }
 
-app "forge/gitlab" {
+app "forge/gitlab-runner" {
 
     build {
         use "docker-pull" {
