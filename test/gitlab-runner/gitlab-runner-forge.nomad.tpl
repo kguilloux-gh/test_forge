@@ -16,6 +16,10 @@ job "gitlab-runner-forge" {
             mode = "fail"
         }
 
+        network {
+            port "gitlab-runner" { to = 8093 }
+        }
+
         constraint {
             attribute = "$\u007Bnode.class\u007D"
             value     = "data"
