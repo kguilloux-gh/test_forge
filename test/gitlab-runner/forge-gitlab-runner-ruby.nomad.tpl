@@ -1,4 +1,4 @@
-job "forge-gitlab-runner" {
+job "forge-gitlab-runner-ruby" {
     datacenters = ["${datacenter}"]
     type = "service"
 
@@ -25,7 +25,7 @@ job "forge-gitlab-runner" {
             value     = "data"
         }
 
-        task "gitlab-runner-maven-autoregistered" {
+        task "gitlab-runner-ruby-autoregistered" {
             driver = "docker"
 
             template {
@@ -51,13 +51,13 @@ EOH
                     "--executor",
                     "docker",
                     "--docker-image",
-                    "maven",
+                    "ruby",
                     "--url",
                     "${external_url_gitlab_protocole}://${external_url_gitlab_hostname}",
                     "--registration-token",
                     "$\u007BTOKEN_GITLAB_RUNNER\u007D",
                     "--description",
-                    "runner docker java",
+                    "runner docker ruby",
                     "--run-untagged=true",
                     "--locked=false",
                     "--access-level=not_protected"
