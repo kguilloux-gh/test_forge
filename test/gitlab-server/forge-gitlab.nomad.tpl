@@ -79,7 +79,7 @@ EOH
                 change_mode = "restart"
                 data = <<EOH
 {{ with secret "forge/gitlab" }}
-gitlab_rails['initial_root_password'] = '{{ .Data.data.root_password }}'
+gitlab_rails['initial_root_password'] = '{{ .Data.data.gitlab_root_password }}'
 {{ end }}
 gitlab_rails['ldap_enabled'] = true
 gitlab_rails['prevent_ldap_sign_in'] = false
