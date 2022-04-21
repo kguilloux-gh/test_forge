@@ -24,7 +24,7 @@ app "forge/gitlab-runner" {
   
     deploy{
         use "nomad-jobspec" {
-            jobspec = templatefile("${path.app}/gitlab-runner-forge.nomad.tpl", {
+            jobspec = templatefile("${path.app}/forge-gitlab-runner.nomad.tpl", {
             image   = var.image
             tag     = var.tag
             datacenter = var.datacenter
@@ -37,7 +37,7 @@ app "forge/gitlab-runner" {
 
 variable "datacenter" {
     type    = string
-    default = "henix_docker_platform_test"
+    default = "test"
 }
 
 variable "image" {
@@ -52,7 +52,7 @@ variable "tag" {
 
 variable "external_url_gitlab_hostname" {
     type    = string
-    default = "test"
+    default = "gitlab.asipsante.fr"
 }
 
 variable "external_url_gitlab_protocole" {

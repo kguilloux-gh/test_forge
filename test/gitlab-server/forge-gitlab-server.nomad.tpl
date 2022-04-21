@@ -1,4 +1,4 @@
-job "gitlab-forge" {
+job "forge-gitlab-server" {
     datacenters = ["${datacenter}"]
     type = "service"
 

@@ -1,4 +1,4 @@
-job "gitlab-runner-forge" {
+job "forge-gitlab-runner" {
     datacenters = ["${datacenter}"]
     type = "service"
 
@@ -6,7 +6,7 @@ job "gitlab-runner-forge" {
         policies = ["forge"]
         change_mode = "restart"
     }
-    group "gitlab-runner-server" {    
+    group "gitlab-runner-server" {
         count ="1"
 
         restart {
@@ -25,7 +25,7 @@ job "gitlab-runner-forge" {
             value     = "data"
         }
 
-        task "gitlab-autoregistered" {
+        task "gitlab-runner-maven-autoregistered" {
             driver = "docker"
 
             template {

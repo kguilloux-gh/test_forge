@@ -24,7 +24,7 @@ app "forge/gitlab" {
   
     deploy{
         use "nomad-jobspec" {
-            jobspec = templatefile("${path.app}/gitlab-forge.nomad.tpl", {
+            jobspec = templatefile("${path.app}/forge-gitlab.nomad.tpl", {
             image   = var.image
             tag     = var.tag
             datacenter = var.datacenter
@@ -52,7 +52,7 @@ variable "tag" {
 
 variable "external_url_gitlab_hostname" {
     type    = string
-    default = "test"
+    default = "gitlab.asipsante.fr"
 }
 
 variable "external_url_gitlab_protocole" {
