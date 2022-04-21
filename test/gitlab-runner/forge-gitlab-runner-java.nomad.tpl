@@ -1,4 +1,4 @@
-job "forge-gitlab-runner" {
+job "forge-gitlab-runner-java" {
     datacenters = ["${datacenter}"]
     type = "service"
 
@@ -6,7 +6,7 @@ job "forge-gitlab-runner" {
         policies = ["forge"]
         change_mode = "restart"
     }
-    group "gitlab-runner-server" {
+    group "gitlab-runner-java-server" {
         count ="1"
 
         restart {
@@ -25,7 +25,7 @@ job "forge-gitlab-runner" {
             value     = "data"
         }
 
-        task "gitlab-runner-maven-autoregistered" {
+        task "gitlab-runner-java-autoregistered" {
             driver = "docker"
 
             template {
@@ -66,7 +66,7 @@ EOH
                 mount {
                     type = "volume"
                     target = "/etc/gitlab-runner"
-                    source = "gitlab-runner-config"
+                    source = "forge-gitlab-runner-config"
                     readonly = false
                     volume_options {
                         no_copy = false
@@ -102,7 +102,7 @@ EOH
             }
         }
 
-        task "gitlab-runner" {
+        task "gitlab-runner-java" {
             driver = "docker"
 
             config {
@@ -113,7 +113,7 @@ EOH
                 mount {
                     type = "volume"
                     target = "/etc/gitlab-runner"
-                    source = "gitlab-runner-config"
+                    source = "forge-gitlab-runner-config"
                     readonly = false
                     volume_options {
                         no_copy = false

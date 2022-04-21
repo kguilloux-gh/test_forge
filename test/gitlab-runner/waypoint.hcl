@@ -24,30 +24,7 @@ app "forge/gitlab-runner-java" {
   
     deploy{
         use "nomad-jobspec" {
-            jobspec = templatefile("${path.app}/forge-gitlab-runner.nomad.tpl", {
-            image   = var.image
-            tag     = var.tag
-            datacenter = var.datacenter
-            external_url_gitlab_hostname = var.external_url_gitlab_hostname
-            external_url_gitlab_protocole = var.external_url_gitlab_protocole
-            })
-        }
-    }
-}
-
-app "forge/gitlab-runner-ruby" {
-
-    build {
-        use "docker-pull" {
-            image = var.image
-            tag   = var.tag
-            disable_entrypoint = true
-        }
-    }
-  
-    deploy{
-        use "nomad-jobspec" {
-            jobspec = templatefile("${path.app}/forge-gitlab-runner-ruby.nomad.tpl", {
+            jobspec = templatefile("${path.app}/forge-gitlab-runner-java.nomad.tpl", {
             image   = var.image
             tag     = var.tag
             datacenter = var.datacenter
