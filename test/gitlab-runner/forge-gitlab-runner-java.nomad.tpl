@@ -54,7 +54,7 @@ EOH
                     "--docker-image",
                     "maven",
                     "--url",
-                    "https://${external_url_gitlab_hostname}",
+                    "http://${external_url_gitlab_hostname}",
                     "--registration-token",
                     "$\u007BTOKEN_GITLAB_RUNNER\u007D",
                     "--description",
