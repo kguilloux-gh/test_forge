@@ -110,6 +110,7 @@ EOH
 
                 image   = "${image}:${tag}"
                 ports   = ["gitlab_runner"]
+                extra_hosts = ["${external_url_gitlab_hostname}:$\u007BNOMAD_IP_gitlab_runner\u007D"]
 
                 mount {
                     type = "volume"
