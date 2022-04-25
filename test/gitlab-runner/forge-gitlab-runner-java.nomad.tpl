@@ -44,6 +44,7 @@ EOH
 
                 image   = "${image}:${tag}"
                 ports   = ["gitlab-runner"]
+                extra_hosts = ["${external_url_gitlab_hostname}:$\u007BNOMAD_IP_gitlab-runner\u007D"]
 
                 command = "register"
                 args = [
@@ -53,7 +54,7 @@ EOH
                     "--docker-image",
                     "maven",
                     "--url",
-                    "${external_url_gitlab_protocole}://${external_url_gitlab_hostname}",
+                    "http://${external_url_gitlab_hostname}",
                     "--registration-token",
                     "$\u007BTOKEN_GITLAB_RUNNER\u007D",
                     "--description",
