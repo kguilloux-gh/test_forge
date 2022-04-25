@@ -144,6 +144,19 @@ EOH
                 cpu    = 1000
                 memory = 1024
             }
+
+            service {
+                name = "$\u007BNOMAD_JOB_NAME\u007D"
+                port = "gitlab_runner"
+                check {
+                    name     = "alive"
+                    type     = "tcp"
+                    interval = "60s"
+                    timeout  = "10s"
+                    failures_before_critical = 5
+                    port     = "gitlab_runner"
+                }
+            }
         }
     }
 }
