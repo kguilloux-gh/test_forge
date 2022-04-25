@@ -17,7 +17,7 @@ job "forge-gitlab-runner-java" {
         }
 
         network {
-            port "gitlab-runner" { to = 8093 }
+            port "gitlab_runner" { to = 8093 }
         }
 
         constraint {
@@ -43,8 +43,8 @@ EOH
             config {
 
                 image   = "${image}:${tag}"
-                ports   = ["gitlab-runner"]
-                extra_hosts = ["${external_url_gitlab_hostname}:$\u007BNOMAD_IP_gitlab-runner\u007D"]
+                ports   = ["gitlab_runner"]
+                extra_hosts = ["${external_url_gitlab_hostname}:$\u007BNOMAD_IP_gitlab_runner\u007D"]
 
                 command = "register"
                 args = [
@@ -109,7 +109,7 @@ EOH
             config {
 
                 image   = "${image}:${tag}"
-                ports   = ["gitlab-runner"]
+                ports   = ["gitlab_runner"]
 
                 mount {
                     type = "volume"
