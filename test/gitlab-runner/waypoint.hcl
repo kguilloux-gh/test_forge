@@ -52,7 +52,7 @@ variable "tag" {
 
 variable "external_url_gitlab_hostname" {
     type    = string
-    default = "gitlab.asipsante.fr"
+    default = "gitlab.forge.asipsante.fr"
 }
 
 variable "external_url_gitlab_protocole" {
