@@ -25,9 +25,23 @@ job "grafana" {
 
         task "grafana" {
             driver = "docker"
+
+            template {
+                data = <<EOH
+{{ with secret "supervision/grafana" }}
+GF_SECURITY_ADMIN_PASSWORD={{ .Data.data.grafana_password }}
+{{ end }}
+                EOH
+                destination = "secrets/grafana-ans.env"
+                change_mode = "restart"
+                env = true
+            }
+
             config {
                 image   = "${image}:${tag}"
                 ports   = ["grafana"]
+                volumes = ["name=grafana-data,io_priority=high,size=2,repl=2:/var/lib/grafana"]
+                volume_driver = "pxd"
             }
 
             resources {
