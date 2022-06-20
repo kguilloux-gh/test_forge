@@ -37,7 +37,7 @@ job "grafana" {
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = ["urlprefix-grafana.ans/"]
+                tags = ["urlprefix-grafana.henix.asipsante.fr/"]
                 port = "grafana"
                 check {
                     name     = "alive"
