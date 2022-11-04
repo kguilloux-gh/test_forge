@@ -22,7 +22,7 @@ job "forge-squashtm-postgresql" {
         }
 
         network {
-            port "postgres" { to = 8080 }
+            port "postgres" { to = 5432 }
         }
         
         task "postgres" {
@@ -47,13 +47,12 @@ POSTGRES_PASSWORD={{ .Data.data.sqtm_db_password }}
                 volume_driver = "pxd"
             }
             resources {
-                cpu    = 300
-                memory = 512
+                cpu    = 600
+                memory = 1024
             }
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = ["urlprefix-:8080 proto=tcp"]
                 port = "postgres"
                 check {
                     name     = "alive"
