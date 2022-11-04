@@ -30,10 +30,8 @@ job "forge-squashtm-premium" {
             template {
                 data = <<EOH
 SQTM_DB_TYPE=postgresql
-{{ range service "forge-squashtm-postgresql" }}
-SQTM_DB_HOST={{ .Address }}
-SQTM_DB_PORT={{.Port}}
-{{ end }}
+SQTM_DB_HOST={{ range service "forge-squashtm-postgresql" }}{{.Address}}{{ end }}
+SQTM_DB_PORT={{ range service "forge-squashtm-postgresql" }}{{.Port}}{{ end }}
 {{ with secret "forge/squashtm" }}
 SQTM_DB_NAME={{ .Data.data.sqtm_db_name }}
 SQTM_DB_USERNAME={{ .Data.data.sqtm_db_username }}

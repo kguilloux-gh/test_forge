@@ -6,7 +6,7 @@ job "forge-squashtm-postgresql" {
         policies = ["forge"]
         change_mode = "restart"
     }
-    group "squashtm-psstgresql" {
+    group "squashtm-postgresql" {
         count ="1"
         
         restart {
