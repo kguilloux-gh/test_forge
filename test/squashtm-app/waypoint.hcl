@@ -4,7 +4,7 @@ labels = { "domaine" = "forge" }
 
 runner {
     enabled = true
-    data_source "git" {s
+    data_source "git" {
         url  = "https://github.com/kguilloux-gh/test_forge.git"
         ref  = "main"
         path = "test/squashtm-app"
