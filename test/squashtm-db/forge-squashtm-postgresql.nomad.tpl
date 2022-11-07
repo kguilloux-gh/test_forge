@@ -34,6 +34,7 @@ POSTGRES_DB={{ .Data.data.sqtm_db_name }}
 POSTGRES_USER={{ .Data.data.sqtm_db_username }}
 POSTGRES_PASSWORD={{ .Data.data.sqtm_db_password }}
 {{ end }}
+POSTGRES_HOST_AUTH_METHOD="md5"
                 EOH
                 destination = "secrets/file.env"
                 change_mode = "restart"
@@ -48,7 +49,7 @@ POSTGRES_PASSWORD={{ .Data.data.sqtm_db_password }}
             }
             resources {
                 cpu    = 600
-                memory = 1024
+                memory = 2048
             }
             
             service {
