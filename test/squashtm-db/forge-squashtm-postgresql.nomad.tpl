@@ -29,11 +29,9 @@ job "forge-squashtm-postgresql" {
             driver = "docker"
             template {
                 data = <<EOH
-{{ with secret "forge/squashtm" }}
-POSTGRES_DB={{ .Data.data.sqtm_db_name }}
-POSTGRES_USER={{ .Data.data.sqtm_db_username }}
-POSTGRES_PASSWORD={{ .Data.data.sqtm_db_password }}
-{{ end }}
+POSTGRES_DB={{ with secret "forge/squashtm" }}{{ .Data.data.sqtm_db_name }}{{ end }}
+POSTGRES_USER={{ with secret "forge/squashtm" }}{{ .Data.data.sqtm_db_username }}{{ end }}
+POSTGRES_PASSWORD={{ with secret "forge/squashtm" }}{{ .Data.data.sqtm_db_password }}{{ end }}
 POSTGRES_HOST_AUTH_METHOD="md5"
                 EOH
                 destination = "secrets/file.env"
