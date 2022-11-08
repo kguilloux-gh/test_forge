@@ -50,8 +50,8 @@ SQTM_DB_PASSWORD={{ .Data.data.sqtm_db_password }}
                 volume_driver = "pxd"
             }
             resources {
-                cpu    = 300
-                memory = 512
+                cpu    = 600
+                memory = 2048
             }
             
             service {
