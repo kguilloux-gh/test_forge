@@ -29,10 +29,9 @@ job "forge-squashtm-postgresql" {
             driver = "docker"
             template {
                 data = <<EOH
-POSTGRES_DB = {{ with secret "forge/squashtm" }}{{ .Data.data.sqtm_db_name }}{{ end }}
-POSTGRES_USER = {{ with secret "forge/squashtm" }}{{ .Data.data.sqtm_db_username }}{{ end }}
+POSTGRES_DATABASE = {{ with secret "forge/squashtm" }}{{ .Data.data.sqtm_db_name }}{{ end }}
+POSTGRES_USERNAME = {{ with secret "forge/squashtm" }}{{ .Data.data.sqtm_db_username }}{{ end }}
 POSTGRES_PASSWORD = {{ with secret "forge/squashtm" }}{{ .Data.data.sqtm_db_password }}{{ end }}
-POSTGRES_HOST_AUTH_METHOD = "md5"
                 EOH
                 destination = "secrets/file.env"
                 change_mode = "restart"
@@ -42,7 +41,7 @@ POSTGRES_HOST_AUTH_METHOD = "md5"
             config {
                 image   = "${image}:${tag}"
                 ports   = ["postgres"]
-                volumes = ["name=forge-squashtm-db,io_priority=high,size=25,repl=2:/var/lib/postgresql/data"]
+                volumes = ["name=forge-squashtm-db,io_priority=high,size=25,repl=2:/bitnami/postgresql"]
                 volume_driver = "pxd"
             }
             resources {
