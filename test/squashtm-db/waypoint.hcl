@@ -40,7 +40,7 @@ variable "datacenter" {
 
 variable "image" {
     type    = string
-    default = "bitnami/postgresql"
+    default = "postgres"
 }
 
 variable "tag" {
