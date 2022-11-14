@@ -32,7 +32,7 @@ job "forge-squashtm-postgresql" {
 POSTGRES_DB = {{ with secret "forge/squashtm" }}{{ .Data.data.sqtm_db_name }}{{ end }}
 POSTGRES_USER = {{ with secret "forge/squashtm" }}{{ .Data.data.sqtm_db_username }}{{ end }}
 POSTGRES_PASSWORD = {{ with secret "forge/squashtm" }}{{ .Data.data.sqtm_db_password }}{{ end }}
-POSTGRES_INITDB_ARGS = "--auth-host=scram-sha-256 --auth-local=scram-sha-256"
+#POSTGRES_INITDB_ARGS = "--auth-host=scram-sha-256 --auth-local=scram-sha-256"
                 EOH
                 destination = "secrets/file.env"
                 change_mode = "restart"
