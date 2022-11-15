@@ -56,12 +56,12 @@ SQTM_DB_PASSWORD={{ .Data.data.sqtm_db_password }}
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = ["urlprefix-:8090 proto=tcp"]
+                tags = ["urlprefix-$\u007BEXTERNAL_HOSTNAME\u007D"]
                 port = "squashtm"
                 check {
                     name     = "alive"
-                    type     = "tcp"
-                    interval = "300s"
+                    type     = "http"
+                    interval = "30	0s"
                     timeout  = "5s"
                     port     = "squashtm"
                 }
