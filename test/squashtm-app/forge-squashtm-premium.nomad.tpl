@@ -61,7 +61,7 @@ SQTM_DB_PASSWORD={{ .Data.data.sqtm_db_password }}
                 check {
                     name     = "alive"
                     type     = "http"
-                    path     = "/"
+                    path     = "/squash"
                     interval = "30s"
                     timeout  = "5s"
                     port     = "squashtm"
