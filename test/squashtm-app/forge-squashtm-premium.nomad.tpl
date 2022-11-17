@@ -22,7 +22,7 @@ job "forge-squashtm-premium" {
         }
 
         network {
-            port "squashtm" { to = 8080 }
+            port "squashtm" { to = 8090 }
         }
         
         task "squashtm" {
