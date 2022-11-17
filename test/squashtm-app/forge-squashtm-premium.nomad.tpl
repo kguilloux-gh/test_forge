@@ -56,12 +56,12 @@ SQTM_DB_PASSWORD={{ .Data.data.sqtm_db_password }}
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = ["urlprefix-/squash"]
+                tags = ["urlprefix-squashtm.test.henix.asipsante.fr/"]
                 port = "squashtm"
                 check {
                     name     = "alive"
                     type     = "http"
-                    path     = "/squash"
+                    path     = "/"
                     interval = "30s"
                     timeout  = "5s"
                     port     = "squashtm"
