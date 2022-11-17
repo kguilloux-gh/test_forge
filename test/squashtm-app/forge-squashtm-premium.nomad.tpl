@@ -22,7 +22,7 @@ job "forge-squashtm-premium" {
         }
 
         network {
-            port "squashtm" { to = 80 }
+            port "squashtm" { to = 8080 }
         }
         
         task "squashtm" {
@@ -56,12 +56,12 @@ SQTM_DB_PASSWORD={{ .Data.data.sqtm_db_password }}
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = ["urlprefix-/squashtm"]
+                tags = ["urlprefix-/squash"]
                 port = "squashtm"
                 check {
                     name     = "alive"
                     type     = "http"
-                    path     = "/squashtm"
+                    path     = "/squash"
                     interval = "30s"
                     timeout  = "5s"
                     port     = "squashtm"
