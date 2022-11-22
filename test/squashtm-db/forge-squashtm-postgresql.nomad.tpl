@@ -41,7 +41,7 @@ POSTGRES_PASSWORD = {{ with secret "forge/squashtm" }}{{ .Data.data.sqtm_db_pass
             config {
                 image   = "${image}:${tag}"
                 ports   = ["postgres"]
-                volumes = ["name=forge-squashtm-db,io_priority=high,size=25,repl=2:/bitnami/postgresql"]
+                volumes = ["name=forge-squashtm-db,io_priority=high,size=25,repl=2:/var/lib/postgresql/data"]
                 volume_driver = "pxd"
             }
             resources {
