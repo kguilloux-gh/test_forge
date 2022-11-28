@@ -24,7 +24,7 @@ app "forge/squashtm-app" {
   
     deploy{
         use "nomad-jobspec" {
-            jobspec = templatefile("${path.app}/forge-squashtm-premium.nomad.tpl", {
+            jobspec = templatefile("${path.app}/forge-squashtm-licencepremium.nomad.tpl", {
             image   = var.image
             tag     = var.tag
             datacenter = var.datacenter
