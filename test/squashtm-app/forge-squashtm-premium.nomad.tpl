@@ -24,6 +24,33 @@ job "forge-squashtm-premium" {
         network {
             port "squashtm" { to = 8080 }
         }
+
+        task "pre-config" {
+            driver = "docker"
+
+            config {
+                image = "busybox:latest"
+                mount {
+                    type = "volume"
+                    target = "/opt/squash-tm/plugins/license/squash-tm.lic"
+                    source = "secret/squash-tm.lic"
+                    readonly = false
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                }
+                command = "sh"
+                args = ["-c", "chown -R squashtm:squashtm /opt/squash-tm/plugins/license"]
+            }
+            resources {
+                cpu = 100
+                memory = 64
+            }
+            lifecycle {
+                hook = "prestart"
+                sidecar = "false"
+            }
+        }
         
         task "squashtm" {
             driver = "docker"
@@ -97,7 +124,7 @@ EOH
                     name     = "alive"
                     type     = "http"
                     path     = "/squash"
-                    interval = "30s"
+                    interval = "60s"
                     timeout  = "5s"
                     port     = "squashtm"
                 }
