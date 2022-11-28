@@ -31,7 +31,7 @@ job "forge-squashtm-premium" {
             config {
                 image = "busybox:latest"
                 mount {
-                    type = "volume"
+                    type = "bind"
                     target = "/opt/squash-tm/plugins/license/squash-tm.lic"
                     source = "secret/squash-tm.lic"
                     readonly = false
