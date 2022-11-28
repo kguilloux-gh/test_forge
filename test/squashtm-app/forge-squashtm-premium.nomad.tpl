@@ -1,4 +1,4 @@
-job "forge-squashtm-licencepremium" {
+job "forge-squashtm-premium" {
     datacenters = ["${datacenter}"]
     type = "service"
 
