@@ -54,7 +54,6 @@ EOH
             config {
                 image   = "${image}:${tag}"
                 ports   = ["squashtm"]
-            }
 
                 mount {
                     type = "volume"
@@ -83,6 +82,7 @@ EOH
                         propagation = "rshared"
                     }
                 }
+            }
 
             resources {
                 cpu    = 600
