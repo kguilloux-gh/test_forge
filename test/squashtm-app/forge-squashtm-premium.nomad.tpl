@@ -39,7 +39,7 @@ job "forge-squashtm-premium" {
                 }
             }
                 command = "sh"
-                args = ["-c", "chown -R squashtm:squashtm /opt/squash-tm/plugins/license"]
+                args = ["-c", "ls"]
             }
             resources {
                 cpu = 100
