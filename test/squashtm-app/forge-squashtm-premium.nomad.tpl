@@ -29,17 +29,8 @@ job "forge-squashtm-premium" {
             driver = "docker"
             config {
                 image = "busybox:latest"
-                mount {
-                    type = "bind"
-                    target = "/opt/squash-tm/plugins/license/squash-tm.lic"
-                    source = "secret/squash-tm.lic"
-                    readonly = false
-                    bind_options {
-                        propagation = "rshared"
-                }
-            }
                 command = "sh"
-                args = ["-c", "ls"]
+                args = ["-c", "mkdir /opt/squash-tm/plugins/license"]
             }
             resources {
                 cpu = 100
