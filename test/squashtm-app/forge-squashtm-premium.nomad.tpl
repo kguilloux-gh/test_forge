@@ -43,12 +43,47 @@ SQTM_DB_PASSWORD={{ .Data.data.sqtm_db_password }}
                 env = true
             }
 
+            template {
+                data = <<EOH
+{{ with secret "forge/squashtm" }}{{ .Data.data.sqtm_licence }}{{ end }}
+EOH
+                destination = "secret/squash-tm.lic"
+                change_mode = "restart"
+            }
+
             config {
                 image   = "${image}:${tag}"
                 ports   = ["squashtm"]
-                volumes = ["name=forge-squashtm-logs,io_priority=high,size=2,repl=2:/opt/squash-tm/logs"]
-                volume_driver = "pxd"
             }
+
+                mount {
+                    type = "volume"
+                    target = "/opt/squash-tm/logs"
+                    source = "forge-squashtm-logs"
+                    readonly = false
+                    volume_options {
+                        no_copy = false
+                        driver_config {
+                            name = "pxd"
+                            options {
+                                io_priority = "high"
+                                size = 2
+                                repl = 2
+                            }
+                        }
+                    }
+                }
+
+                mount {
+                    type = "bind"
+                    target = "/opt/squash-tm/plugins"
+                    source = "secret/squash-tm.lic"
+                    readonly = false
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                }
+
             resources {
                 cpu    = 600
                 memory = 2048
