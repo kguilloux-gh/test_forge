@@ -75,7 +75,7 @@ EOH
 
                 mount {
                     type = "bind"
-                    target = "/opt/squash-tm/plugins"
+                    target = "/opt/squash-tm/plugins/squash-tm.lic"
                     source = "secret/squash-tm.lic"
                     readonly = false
                     bind_options {
