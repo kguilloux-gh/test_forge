@@ -27,18 +27,17 @@ job "forge-squashtm-premium" {
 
         task "pre-config" {
             driver = "docker"
-
+            mount {
+                type = "bind"
+                target = "/opt/squash-tm/plugins/license/squash-tm.lic"
+                source = "secret/squash-tm.lic"
+                readonly = false
+                bind_options {
+                   propagation = "rshared"
+                }
+            }
             config {
                 image = "busybox:latest"
-                mount {
-                    type = "bind"
-                    target = "/opt/squash-tm/plugins/license/squash-tm.lic"
-                    source = "secret/squash-tm.lic"
-                    readonly = false
-                    bind_options {
-                        propagation = "rshared"
-                    }
-                }
                 command = "sh"
                 args = ["-c", "chown -R squashtm:squashtm /opt/squash-tm/plugins/license"]
             }
@@ -51,7 +50,7 @@ job "forge-squashtm-premium" {
                 sidecar = "false"
             }
         }
-        
+
         task "squashtm" {
             driver = "docker"
             template {
