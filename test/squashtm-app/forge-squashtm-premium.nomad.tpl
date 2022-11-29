@@ -91,7 +91,7 @@ EOH
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = ["urlprefix-squash.forge.henix.asipsante.fr/"]
+                tags = ["urlprefix-squash2.forge.henix.asipsante.fr/"]
                 port = "squashtm"
                 check {
                     name     = "alive"
