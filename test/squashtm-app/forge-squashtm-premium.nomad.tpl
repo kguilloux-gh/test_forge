@@ -53,7 +53,7 @@ EOH
 
             config {
                 image   = "${image}:${tag}"
-                ports   = ["squashtm"]
+                ports   = ["http"]
 
                 mount {
                     type = "bind"
