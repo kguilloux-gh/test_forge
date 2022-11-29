@@ -37,6 +37,7 @@ job "forge-squashtm-premium" {
                     volume_options {
                         no_copy = false
                         driver_config {
+                            name = "pxd"
                             options {
                                 io_priority = "high"
                                 size = 2
@@ -105,7 +106,7 @@ EOH
                         }
                     }
                 }
-				
+
                 mount {
                     type = "volume"
                     target = "/opt/squash-tm/plugins/license"
@@ -114,6 +115,7 @@ EOH
                     volume_options {
                         no_copy = false
                         driver_config {
+                            name = "pxd"
                             options {
                                 io_priority = "high"
                                 size = 2
