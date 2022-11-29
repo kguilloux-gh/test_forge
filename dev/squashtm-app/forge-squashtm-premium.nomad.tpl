@@ -22,40 +22,7 @@ job "forge-squashtm-premium" {
         }
 
         network {
-            port "squashtm" { to = 8080 }
-        }
-
-        task "pre-config" {
-            driver = "docker"
-            config {
-                image = "busybox:latest"
-                mount {
-                    type = "volume"
-                    target = "/opt/squash-tm/plugins/license"
-                    source = "forge-squashtm-config"
-                    readonly = false
-                    volume_options {
-                        no_copy = false
-                        driver_config {
-                            options {
-                                io_priority = "high"
-                                size = 2
-                                repl = 2
-                            }
-                        }
-                    }
-                }
-                command = "sh"
-                args = ["-c", "chown -R squashtm:squashtm /opt/squash-tm/plugins/license"]
-            }
-            resources {
-                cpu = 100
-                memory = 64
-            }
-            lifecycle {
-                hook = "prestart"
-                sidecar = "false"
-            }
+            port "http" { to = 8080 }
         }
 
         task "squashtm" {
@@ -86,7 +53,7 @@ EOH
 
             config {
                 image   = "${image}:${tag}"
-                ports   = ["squashtm"]
+                ports   = ["http"]
 
                 mount {
                     type = "volume"
@@ -97,23 +64,6 @@ EOH
                         no_copy = false
                         driver_config {
                             name = "pxd"
-                            options {
-                                io_priority = "high"
-                                size = 2
-                                repl = 2
-                            }
-                        }
-                    }
-                }
-
-                mount {
-                    type = "volume"
-                    target = "/opt/squash-tm/plugins/license"
-                    source = "forge-squashtm-config"
-                    readonly = false
-                    volume_options {
-                        no_copy = false
-                        driver_config {
                             options {
                                 io_priority = "high"
                                 size = 2
@@ -136,20 +86,20 @@ EOH
 
             resources {
                 cpu    = 600
-                memory = 2048
+                memory = 4096
             }
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
                 tags = ["urlprefix-squashtm.dev.henix.asipsante.fr/"]
-                port = "squashtm"
+                port = "http"
                 check {
                     name     = "alive"
                     type     = "http"
                     path     = "/squash"
                     interval = "60s"
                     timeout  = "5s"
-                    port     = "squashtm"
+                    port     = "http"
                 }
             }
         } 
