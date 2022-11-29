@@ -25,6 +25,39 @@ job "forge-squashtm-premium" {
             port "squashtm" { to = 8080 }
         }
 
+        task "pre-config" {
+            driver = "docker"
+            config {
+                image = "busybox:latest"
+                mount {
+                    type = "volume"
+                    target = "/opt/squash-tm/plugins/license"
+                    source = "forge-squashtm-config"
+                    readonly = false
+                    volume_options {
+                        no_copy = false
+                        driver_config {
+                            options {
+                                io_priority = "high"
+                                size = 2
+                                repl = 2
+                            }
+                        }
+                    }
+                }
+                command = "sh"
+                args = ["-c", "chown -R squashtm:squashtm /opt/squash-tm/plugins/license"]
+            }
+            resources {
+                cpu = 100
+                memory = 64
+            }
+            lifecycle {
+                hook = "prestart"
+                sidecar = "false"
+            }
+        }
+
         task "squashtm" {
             driver = "docker"
             template {
@@ -64,6 +97,23 @@ EOH
                         no_copy = false
                         driver_config {
                             name = "pxd"
+                            options {
+                                io_priority = "high"
+                                size = 2
+                                repl = 2
+                            }
+                        }
+                    }
+                }
+
+                mount {
+                    type = "volume"
+                    target = "/opt/squash-tm/plugins/license"
+                    source = "forge-squashtm-config"
+                    readonly = false
+                    volume_options {
+                        no_copy = false
+                        driver_config {
                             options {
                                 io_priority = "high"
                                 size = 2
