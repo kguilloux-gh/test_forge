@@ -5,9 +5,9 @@ labels = { "domaine" = "forge" }
 runner {
     enabled = true
     data_source "git" {
-        url  = "https://rhodecode.proxy.dev.forge.esante.gouv.fr/SandBox/QM/test_forgeANS/squashtm.git"
+        url  = "https://github.com/kguilloux-gh/test_forge.git"
         ref  = "var.datacenter"
-        path = "squashtm-app"
+        path = "test/squashtm-app"
         ignore_changes_outside_path = true
     }
 }
