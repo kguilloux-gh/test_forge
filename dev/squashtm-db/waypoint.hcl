@@ -6,7 +6,7 @@ runner {
     enabled = true
     data_source "git" {
         url  = "https://github.com/kguilloux-gh/test_forge.git"
-        ref  = "var.datacenter"
+        ref  = "main"
         path = "dev/squashtm-db"
         ignore_changes_outside_path = true
     }
