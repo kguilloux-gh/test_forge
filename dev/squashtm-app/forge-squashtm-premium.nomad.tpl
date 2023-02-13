@@ -1,7 +1,6 @@
 job "forge-squashtm-premium" {
     datacenters = ["${datacenter}"]
     type = "service"
-
     vault {
         policies = ["forge"]
         change_mode = "restart"
@@ -54,7 +53,6 @@ EOH
             config {
                 image   = "${image}:${tag}"
                 ports   = ["http"]
-
                 mount {
                     type = "volume"
                     target = "/opt/squash-tm/logs"
