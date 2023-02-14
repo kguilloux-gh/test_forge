@@ -30,23 +30,13 @@ job "forge-squashtm-premium" {
             config {
                 image = "busybox:latest"
                 mount {
-                    type = "volume"
-                    target = "/opt/squash-tm/conf"
-                    source = "forge-squashtm-config-log"
+                    type = "bind"
+                    target = "/opt/squash-tm/conf/log4j2.xml"
+                    source = "secrets/log4j2.xml"
                     readonly = false
-                    volume_options {
-                        no_copy = false
-                        driver_config {
-                            options {
-                                io_priority = "high"
-                                size = 2
-                                repl = 2
-                            }
-                        }
-                    }
                 }
                 command = "sh"
-                args = ["-c", "chown -R squashtm:squashtm /opt/squash-tm/conf"]
+                args = ["-c", "chown squashtm:squashtm /opt/squash-tm/conf/log4j2.xml"]
             }
             resources {
                 cpu = 100
@@ -96,23 +86,6 @@ EOH
             config {
                 image   = "${image}:${tag}"
                 ports   = ["http"]
-
-                mount {
-                    type = "volume"
-                    target = "/opt/squash-tm/conf"
-                    source = "forge-squashtm-config-log"
-                    readonly = false
-                    volume_options {
-                        no_copy = false
-                        driver_config {
-                            options {
-                                io_priority = "high"
-                                size = 2
-                                repl = 2
-                            }
-                        }
-                    }
-                }
 
                 mount {
                     type = "volume"
