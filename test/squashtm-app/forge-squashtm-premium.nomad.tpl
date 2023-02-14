@@ -64,9 +64,6 @@ EOH
                 image   = "${image}:${tag}"
                 ports   = ["http"]
 
-                # Fichier de configuration log4j2
-                volumes = ["secrets/log4j2.xml:/opt/squash-tm/conf/log4j2.xml"]
-                
                 mount {
                     type = "volume"
                     target = "/opt/squash-tm/logs"
@@ -94,6 +91,17 @@ EOH
                         propagation = "rshared"
                     }
                 }
+                # Fichier de configuration log4j2
+                mount {
+                    type = "bind"
+                    target = "/opt/squash-tm/conf/log4j2.xml"
+                    source = "secrets/log4j2.xml"
+                    readonly = false
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                }
+                
             }
 
             resources {
