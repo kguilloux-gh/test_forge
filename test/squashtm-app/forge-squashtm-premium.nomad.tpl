@@ -83,7 +83,6 @@ EOH
                         propagation = "rshared"
                     }
                 }
-                
             }
 
             resources {
