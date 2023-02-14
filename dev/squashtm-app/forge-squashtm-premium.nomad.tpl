@@ -25,39 +25,6 @@ job "forge-squashtm-premium" {
             port "http" { to = 8080 }
         }
 
-        task "pre-config" {
-            driver = "docker"
-            config {
-                image = "busybox:latest"
-                mount {
-                    type = "volume"
-                    target = "/opt/squash-tm/conf"
-                    source = "forge-squashtm-config-log"
-                    readonly = false
-                    volume_options {
-                        no_copy = false
-                        driver_config {
-                            options {
-                                io_priority = "high"
-                                size = 2
-                                repl = 2
-                            }
-                        }
-                    }
-                }
-                command = ["/bin/chown"]
-                args =  ["-R", "squashtm:squashtm", "/opt/squash-tm/conf"]
-            }
-            resources {
-                cpu = 100
-                memory = 64
-            }
-            lifecycle {
-                hook = "prestart"
-                sidecar = "false"
-            }
-        }
-
         task "squashtm" {
             driver = "docker"
             template {
@@ -87,7 +54,7 @@ EOH
 # Fichier de configuration log4j2
       template {
         change_mode = "restart"
-        destination = "secrets/log4j2.xml"
+        destination = "local/log4j2.xml"
         data = <<EOT
 {{ with secret "forge/squashtm" }}{{.Data.data.log4j2}}{{end}}   
         EOT
@@ -98,45 +65,10 @@ EOH
                 ports   = ["http"]
 
                 mount {
-                    type = "volume"
-                    target = "/opt/squash-tm/conf"
-                    source = "forge-squashtm-config-log"
-                    readonly = false
-                    volume_options {
-                        no_copy = false
-                        driver_config {
-                            options {
-                                io_priority = "high"
-                                size = 2
-                                repl = 2
-                            }
-                        }
-                    }
-                }
-
-                mount {
-                    type = "volume"
-                    target = "/opt/squash-tm/logs"
-                    source = "forge-squashtm-logs"
-                    readonly = false
-                    volume_options {
-                        no_copy = false
-                        driver_config {
-                            name = "pxd"
-                            options {
-                                io_priority = "high"
-                                size = 2
-                                repl = 2
-                            }
-                        }
-                    }
-                }
-
-                mount {
                     type = "bind"
                     target = "/opt/squash-tm/plugins/license/squash-tm.lic"
                     source = "secret/squash-tm.lic"
-                    readonly = false
+                    readonly = true
                     bind_options {
                         propagation = "rshared"
                     }
@@ -145,8 +77,8 @@ EOH
                 mount {
                     type = "bind"
                     target = "/opt/squash-tm/conf/log4j2.xml"
-                    source = "secrets/log4j2.xml"
-                    readonly = false
+                    source = "local/log4j2.xml"
+                    readonly = true
                     bind_options {
                         propagation = "rshared"
                     }
