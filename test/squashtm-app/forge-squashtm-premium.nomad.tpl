@@ -51,9 +51,39 @@ EOH
                 change_mode = "restart"
             }
 
+# Fichier de configuration log4j2
+      template {
+        change_mode = "restart"
+        destination = "secrets/log4j2.xml"
+        data = <<EOT
+{{ with secret "forge/squashtm" }}{{.Data.data.log4j2}}{{end}}   
+        EOT
+      }
+
             config {
                 image   = "${image}:${tag}"
                 ports   = ["http"]
+
+                # Fichier de configuration log4j2
+                volumes = ["secrets/log4j2.xml:/opt/squash-tm/conf/log4j2.xml"]
+                
+                mount {
+                    type = "volume"
+                    target = "/opt/squash-tm/logs"
+                    source = "forge-squashtm-logs"
+                    readonly = false
+                    volume_options {
+                        no_copy = false
+                        driver_config {
+                            name = "pxd"
+                            options {
+                                io_priority = "high"
+                                size = 2
+                                repl = 2
+                            }
+                        }
+                    }
+                }
 
                 mount {
                     type = "bind"
