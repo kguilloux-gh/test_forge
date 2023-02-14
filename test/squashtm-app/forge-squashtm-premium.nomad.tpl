@@ -65,6 +65,24 @@ EOH
                 ports   = ["http"]
 
                 mount {
+                    type = "volume"
+                    target = "/opt/squash-tm/logs"
+                    source = "forge-squashtm-logs"
+                    readonly = false
+                    volume_options {
+                        no_copy = false
+                        driver_config {
+                            name = "pxd"
+                            options {
+                                io_priority = "high"
+                                size = 2
+                                repl = 2
+                            }
+                        }
+                    }
+                }
+
+                mount {
                     type = "bind"
                     target = "/opt/squash-tm/plugins/license/squash-tm.lic"
                     source = "secret/squash-tm.lic"
