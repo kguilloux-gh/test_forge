@@ -31,7 +31,7 @@ job "forge-squashtm-premium" {
                 image = "busybox:latest"
                 mount {
                     type = "volume"
-                    target = "/opt/squash-tm/conf/log4j2.xml"
+                    target = "/opt/squash-tm/conf"
                     source = "forge-squashtm-config-log4j2"
                     readonly = false
                     volume_options {
