@@ -32,7 +32,7 @@ job "forge-squashtm-premium" {
                 mount {
                     type = "volume"
                     target = "/opt/squash-tm/conf"
-                    source = "forge-squashtm-config-log4j2"
+                    source = "forge-squashtm-config-log"
                     readonly = false
                     volume_options {
                         no_copy = false
@@ -100,7 +100,7 @@ EOH
                 mount {
                     type = "volume"
                     target = "/opt/squash-tm/conf"
-                    source = "forge-squashtm-config-log4j2"
+                    source = "forge-squashtm-config-log"
                     readonly = false
                     volume_options {
                         no_copy = false
