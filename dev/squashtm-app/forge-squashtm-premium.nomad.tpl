@@ -25,6 +25,39 @@ job "forge-squashtm-premium" {
             port "http" { to = 8080 }
         }
 
+        task "pre-config" {
+            driver = "docker"
+            config {
+                image = "busybox:latest"
+                mount {
+                    type = "volume"
+                    target = "/opt/squash-tm/conf"
+                    source = "forge-squashtm-config-log4j2"
+                    readonly = false
+                    volume_options {
+                        no_copy = false
+                        driver_config {
+                            options {
+                                io_priority = "high"
+                                size = 2
+                                repl = 2
+                            }
+                        }
+                    }
+                }
+                command = "sh"
+                args = ["-c", "chown -R squashtm:squashtm /opt/squash-tm/conf/log4j2.xml"]
+            }
+            resources {
+                cpu = 100
+                memory = 64
+            }
+            lifecycle {
+                hook = "prestart"
+                sidecar = "false"
+            }
+        }
+
         task "squashtm" {
             driver = "docker"
             template {
@@ -63,6 +96,23 @@ EOH
             config {
                 image   = "${image}:${tag}"
                 ports   = ["http"]
+
+                mount {
+                    type = "volume"
+                    target = "/opt/squash-tm/conf"
+                    source = "forge-squashtm-config-log4j2"
+                    readonly = false
+                    volume_options {
+                        no_copy = false
+                        driver_config {
+                            options {
+                                io_priority = "high"
+                                size = 2
+                                repl = 2
+                            }
+                        }
+                    }
+                }
 
                 mount {
                     type = "volume"
