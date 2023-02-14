@@ -6,7 +6,7 @@ runner {
     enabled = true
     data_source "git" {
         url  = "https://github.com/kguilloux-gh/test_forge.git"
-        ref  = "log_conf_file_add"
+        ref  = "main"
         path = "test/squashtm-app"
         ignore_changes_outside_path = true
     }
