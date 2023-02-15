@@ -27,6 +27,9 @@ job "forge-squashtm-premium" {
 
         task "squashtm" {
             driver = "docker"
+
+            user ="squashtm"
+
             template {
                 data = <<EOH
 SQTM_DB_TYPE=postgresql
@@ -51,19 +54,19 @@ EOH
                 change_mode = "restart"
             }
 
-# Fichier de configuration log4j2
-      template {
-        change_mode = "restart"
-        destination = "secrets/log4j2.xml"
-        data = <<EOT
+        # Fichier de configuration log4j2
+            template {
+                change_mode = "restart"
+                destination = "local/log4j2.xml"
+                data = <<EOT
 {{ with secret "forge/squashtm" }}{{.Data.data.log4j2}}{{end}}   
-        EOT
-      }
+                EOT
+            }
 
             config {
                 image   = "${image}:${tag}"
                 ports   = ["http"]
-
+            
                 mount {
                     type = "bind"
                     target = "/opt/squash-tm/plugins/license/squash-tm.lic"
@@ -77,13 +80,12 @@ EOH
                 mount {
                     type = "bind"
                     target = "/opt/squash-tm/conf/log4j2.xml"
-                    source = "secrets/log4j2.xml"
+                    source = "local/log4j2.xml"
                     readonly = false
                     bind_options {
                         propagation = "rshared"
                     }
                 }
-                
             }
 
             resources {
@@ -104,6 +106,7 @@ EOH
                     port     = "http"
                 }
             }
+
         } 
     }
 }
