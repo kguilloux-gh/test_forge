@@ -1,7 +1,6 @@
 job "forge-squashtm-premium" {
     datacenters = ["${datacenter}"]
     type = "service"
-
     vault {
         policies = ["forge"]
         change_mode = "restart"
@@ -63,7 +62,6 @@ EOH
             config {
                 image   = "${image}:${tag}"
                 ports   = ["http"]
-
                 mount {
                     type = "bind"
                     target = "/opt/squash-tm/plugins/license/squash-tm.lic"
@@ -104,7 +102,7 @@ EOH
                 }
             }
         }
-        
+
         task "wait-for-db" {
             lifecycle {
                 hook = "prestart"
@@ -116,5 +114,6 @@ EOH
                 command = "sh"
                 args = ["-c", "chown -R 65534:65534 /prometheus/data"]
             }
-    }
+        }
+
 }
