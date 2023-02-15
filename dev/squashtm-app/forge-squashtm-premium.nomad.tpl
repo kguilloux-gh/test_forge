@@ -71,16 +71,7 @@ EOH
                         propagation = "rshared"
                     }
                 }
-                # Fichier de configuration log4j2
-                mount {
-                    type = "bind"
-                    target = "/opt/squash-tm/conf/log4j2.xml"
-                    source = "local/log4j2.xml"
-                    readonly = true
-                    bind_options {
-                        propagation = "rshared"
-                    }
-                }
+               
             }
 
             resources {
@@ -103,17 +94,6 @@ EOH
             }
         }
 
-        task "wait-for-db" {
-            lifecycle {
-                hook = "prestart"
-                sidecar = false
-            }
 
-            driver = "exec"
-            config {
-                command = "sh"
-                args = ["-c", "chown -R 65534:65534 /prometheus/data"]
-            }
-        }
 
 }
