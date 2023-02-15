@@ -54,7 +54,6 @@ EOH
                 change_mode = "restart"
             }
 
-        # Fichier de configuration log4j2
             template {
                 change_mode = "restart"
                 destination = "local/log4j2.xml"
@@ -76,12 +75,11 @@ EOH
                         propagation = "rshared"
                     }
                 }
-                # Fichier de configuration log4j2
                 mount {
                     type = "bind"
                     target = "/opt/squash-tm/conf/log4j2.xml"
                     source = "local/log4j2.xml"
-                    readonly = false
+                    readonly = true
                     bind_options {
                         propagation = "rshared"
                     }
