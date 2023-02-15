@@ -71,6 +71,15 @@ EOH
                         propagation = "rshared"
                     }
                 }
+                mount {
+                    type = "bind"
+                    target = "/opt/squash-tm/conf/log4j2.xml"
+                    source = "local/log4j2.xml"
+                    readonly = true
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                }
                
             }
 
