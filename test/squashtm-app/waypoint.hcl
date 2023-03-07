@@ -30,7 +30,7 @@ app "forge/squashtm-app" {
             datacenter = var.datacenter
             pluginjaxbapi = var.pluginjaxbapi
             pluginjaxbimpl = var.pluginjaxbimpl
-            pluginbugtrackerjiracloud = var pluginbugtrackerjiracloud
+            pluginbugtrackerjiracloud = var.pluginbugtrackerjiracloud
             })
         }
     }
