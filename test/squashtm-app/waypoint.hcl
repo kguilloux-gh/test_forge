@@ -48,7 +48,17 @@ variable "tag" {
     default = "4.0.2"
 }
 
-variable "plugin" {
+variable "plugin_jaxb-api" {
     type    = string
-    default = "squash-tm-gitlab-bt-connector-3.0.1.RELEASE.jar"
+    default = "jaxb-api-2.2.2.jar"
+}
+
+variable "plugin_jaxb-impl" {
+    type    = string
+    default = "jaxb-impl-2.2.3.jar"
+}
+
+variable "plugin_bugtracker-jiracloud" {
+    type    = string
+    default = "plugin.bugtracker.jiracloud-4.0.0.RELEASE.jar"
 }

@@ -27,6 +27,26 @@ job "forge-squashtm-premium" {
 
         task "squashtm" {
             driver = "docker"
+            artifact {
+                source = "http://repo.proxy-dev-forge.asip.hst.fluxus.net/artifactory/ext-tools/squash-tm/plugins/Jira_Cloud/${plugin_jaxb-api}"
+                options {
+                    archive = false
+                }
+            }
+
+            artifact {
+                source = "http://repo.proxy-dev-forge.asip.hst.fluxus.net/artifactory/ext-tools/squash-tm/plugins/Jira_Cloud/${plugin_jaxb-impl}"
+                options {
+                    archive = false
+                }
+            }
+
+            artifact {
+                source = "http://repo.proxy-dev-forge.asip.hst.fluxus.net/artifactory/ext-tools/squash-tm/plugins/Jira_Cloud/${plugin_bugtracker-jiracloud}"
+                options {
+                    archive = false
+                }
+            }
 
             template {
                 data = <<EOH
@@ -61,13 +81,6 @@ EOH
 EOT
             }
 
-            artifact {
-                source = "http://repo.proxy-dev-forge.asip.hst.fluxus.net/artifactory/ext-tools/squash-tm/plugins/${plugin}"
-                options {
-                    archive = false
-                }
-            }
-
             config {
                 image   = "${image}:${tag}"
                 ports   = ["http"]
@@ -94,8 +107,28 @@ EOT
 
                 mount {
                     type = "bind"
-                    target = "/opt/squash-tm/plugins/${plugin}"
-                    source = "local/${plugin}"
+                    target = "/opt/squash-tm/plugins/${plugin_jaxb-api}"
+                    source = "local/${plugin_jaxb-api}"
+                    readonly = true
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                }
+
+                mount {
+                    type = "bind"
+                    target = "/opt/squash-tm/plugins/${plugin_jaxb-impl}"
+                    source = "local/${plugin_jaxb-impl}"
+                    readonly = true
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                }
+
+                mount {
+                    type = "bind"
+                    target = "/opt/squash-tm/plugins/${plugin_bugtracker-jiracloud}"
+                    source = "local/${plugin_bugtracker-jiracloud}"
                     readonly = true
                     bind_options {
                         propagation = "rshared"
