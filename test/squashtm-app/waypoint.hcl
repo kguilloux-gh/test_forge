@@ -28,6 +28,9 @@ app "forge/squashtm-app" {
             image   = var.image
             tag     = var.tag
             datacenter = var.datacenter
+            pluginjaxbapi = var.pluginjaxbapi
+            pluginjaxbimpl = var.pluginjaxbimpl
+            pluginbugtrackerjiracloud = var pluginbugtrackerjiracloud
             })
         }
     }
