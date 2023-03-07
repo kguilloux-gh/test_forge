@@ -47,3 +47,8 @@ variable "tag" {
     type    = string
     default = "4.0.2"
 }
+
+variable "plugin" {
+    type    = string
+    default = "squash-tm-gitlab-bt-connector-3.0.1.RELEASE.jar"
+}

@@ -27,6 +27,7 @@ job "forge-squashtm-premium" {
 
         task "squashtm" {
             driver = "docker"
+
             template {
                 data = <<EOH
 SQTM_DB_TYPE=postgresql
@@ -60,6 +61,13 @@ EOH
 EOT
             }
 
+            artifact {
+                source = "http://repo.proxy-dev-forge.asip.hst.fluxus.net/artifactory/ext-tools/squash-tm/plugins/${plugin}"
+                options {
+                    archive = false
+                }
+            }
+
             config {
                 image   = "${image}:${tag}"
                 ports   = ["http"]
@@ -79,6 +87,16 @@ EOT
                     target = "/opt/squash-tm/conf/log4j2.xml"
                     source = "local/log4j2.xml"
                     readonly = false
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                }
+
+                mount {
+                    type = "bind"
+                    target = "/opt/squash-tm/plugins/${plugin}"
+                    source = "local/${plugin}"
+                    readonly = true
                     bind_options {
                         propagation = "rshared"
                     }
