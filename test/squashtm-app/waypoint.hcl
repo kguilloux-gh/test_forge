@@ -48,17 +48,17 @@ variable "tag" {
     default = "4.0.2"
 }
 
-variable "plugin_jaxb-api" {
+variable "pluginjaxbapi" {
     type    = string
     default = "jaxb-api-2.2.2.jar"
 }
 
-variable "plugin_jaxb-impl" {
+variable "pluginjaxbimpl" {
     type    = string
     default = "jaxb-impl-2.2.3.jar"
 }
 
-variable "plugin_bugtracker-jiracloud" {
+variable "pluginbugtrackerjiracloud" {
     type    = string
     default = "plugin.bugtracker.jiracloud-4.0.0.RELEASE.jar"
 }

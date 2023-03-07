@@ -28,21 +28,21 @@ job "forge-squashtm-premium" {
         task "squashtm" {
             driver = "docker"
             artifact {
-                source = "http://repo.proxy-dev-forge.asip.hst.fluxus.net/artifactory/ext-tools/squash-tm/plugins/Jira_Cloud/${plugin_jaxb-api}"
+                source = "http://repo.proxy-dev-forge.asip.hst.fluxus.net/artifactory/ext-tools/squash-tm/plugins/Jira_Cloud/${pluginjaxbapi}"
                 options {
                     archive = false
                 }
             }
 
             artifact {
-                source = "http://repo.proxy-dev-forge.asip.hst.fluxus.net/artifactory/ext-tools/squash-tm/plugins/Jira_Cloud/${plugin_jaxb-impl}"
+                source = "http://repo.proxy-dev-forge.asip.hst.fluxus.net/artifactory/ext-tools/squash-tm/plugins/Jira_Cloud/${pluginjaxbimpl}"
                 options {
                     archive = false
                 }
             }
 
             artifact {
-                source = "http://repo.proxy-dev-forge.asip.hst.fluxus.net/artifactory/ext-tools/squash-tm/plugins/Jira_Cloud/${plugin_bugtracker-jiracloud}"
+                source = "http://repo.proxy-dev-forge.asip.hst.fluxus.net/artifactory/ext-tools/squash-tm/plugins/Jira_Cloud/${pluginbugtrackerjiracloud}"
                 options {
                     archive = false
                 }
@@ -107,8 +107,8 @@ EOT
 
                 mount {
                     type = "bind"
-                    target = "/opt/squash-tm/plugins/${plugin_jaxb-api}"
-                    source = "local/${plugin_jaxb-api}"
+                    target = "/opt/squash-tm/plugins/${pluginjaxbapi}"
+                    source = "local/${pluginjaxbapi}"
                     readonly = true
                     bind_options {
                         propagation = "rshared"
@@ -117,8 +117,8 @@ EOT
 
                 mount {
                     type = "bind"
-                    target = "/opt/squash-tm/plugins/${plugin_jaxb-impl}"
-                    source = "local/${plugin_jaxb-impl}"
+                    target = "/opt/squash-tm/plugins/${pluginjaxbimpl}"
+                    source = "local/${pluginjaxbimpl}"
                     readonly = true
                     bind_options {
                         propagation = "rshared"
@@ -127,8 +127,8 @@ EOT
 
                 mount {
                     type = "bind"
-                    target = "/opt/squash-tm/plugins/${plugin_bugtracker-jiracloud}"
-                    source = "local/${plugin_bugtracker-jiracloud}"
+                    target = "/opt/squash-tm/plugins/${pluginbugtrackerjiracloud}"
+                    source = "local/${pluginbugtrackerjiracloud}"
                     readonly = true
                     bind_options {
                         propagation = "rshared"
