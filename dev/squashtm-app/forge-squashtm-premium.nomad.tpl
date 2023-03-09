@@ -26,6 +26,27 @@ job "forge-squashtm-premium" {
 
         task "squashtm" {
             driver = "docker"
+            artifact {
+                source = "http://repo.proxy-dev-forge.asip.hst.fluxus.net/artifactory/ext-tools/squash-tm/plugins/Jira_Cloud/${pluginjaxbapi}"
+                options {
+                    archive = false
+                }
+            }
+
+            artifact {
+                source = "http://repo.proxy-dev-forge.asip.hst.fluxus.net/artifactory/ext-tools/squash-tm/plugins/Jira_Cloud/${pluginjaxbimpl}"
+                options {
+                    archive = false
+                }
+            }
+
+            artifact {
+                source = "http://repo.proxy-dev-forge.asip.hst.fluxus.net/artifactory/ext-tools/squash-tm/plugins/Jira_Cloud/${pluginbugtrackerjiracloud}"
+                options {
+                    archive = false
+                }
+            }
+
             template {
                 data = <<EOH
 SQTM_DB_TYPE=postgresql
@@ -82,6 +103,33 @@ EOH
                 }
                
             }
+                mount {
+                    type = "bind"
+                    target = "/opt/squash-tm/plugins/${pluginjaxbapi}"
+                    source = "local/${pluginjaxbapi}"
+                    readonly = true
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                }
+                mount {
+                    type = "bind"
+                    target = "/opt/squash-tm/plugins/${pluginjaxbimpl}"
+                    source = "local/${pluginjaxbimpl}"
+                    readonly = true
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                }
+                mount {
+                    type = "bind"
+                    target = "/opt/squash-tm/plugins/${pluginbugtrackerjiracloud}"
+                    source = "local/${pluginbugtrackerjiracloud}"
+                    readonly = true
+                    bind_options {
+                        propagation = "rshared"
+                    }
+                }
 
             resources {
                 cpu    = 600

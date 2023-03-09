@@ -28,6 +28,9 @@ app "forge/squashtm-app" {
             image   = var.image
             tag     = var.tag
             datacenter = var.datacenter
+            pluginjaxbapi = var.pluginjaxbapi
+            pluginjaxbimpl = var.pluginjaxbimpl
+            pluginbugtrackerjiracloud = var.pluginbugtrackerjiracloud
             })
         }
     }
@@ -46,4 +49,19 @@ variable "image" {
 variable "tag" {
     type    = string
     default = "4.0.2"
+}
+
+variable "pluginjaxbapi" {
+    type    = string
+    default = "jaxb-api-2.2.2.jar"
+}
+
+variable "pluginjaxbimpl" {
+    type    = string
+    default = "jaxb-impl-2.2.3.jar"
+}
+
+variable "pluginbugtrackerjiracloud" {
+    type    = string
+    default = "plugin.bugtracker.jiracloud-4.0.0.RELEASE.jar"
 }
