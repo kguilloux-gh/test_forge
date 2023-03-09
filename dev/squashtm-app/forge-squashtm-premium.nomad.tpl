@@ -101,8 +101,6 @@ EOH
                         propagation = "rshared"
                     }
                 }
-               
-            }
                 mount {
                     type = "bind"
                     target = "/opt/squash-tm/plugins/${pluginjaxbapi}"
@@ -130,6 +128,7 @@ EOH
                         propagation = "rshared"
                     }
                 }
+            }
 
             resources {
                 cpu    = 600
