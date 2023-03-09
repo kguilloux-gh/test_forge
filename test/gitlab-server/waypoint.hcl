@@ -58,6 +58,11 @@ variable "external_url_gitlab_hostname" {
     default = "gitlab.forge.asipsante.fr"
 }
 
+variable "external_url_gitlab_protocole" {
+    type    = string
+    default = "https"
+}
+
 variable "url_proxy_sortant_http" {
     type    = string
     default = "http://c-ac-proxy01.asip.hst.fluxus.net:3128/"
