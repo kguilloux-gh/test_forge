@@ -104,7 +104,13 @@ main:
   lowercase_usernames: false
 EOS
 prometheus['enable'] = false
-                EOH
+# Pour permettre le lien gitlab-github
+gitlab_rails['env'] = {
+  "http_proxy" => "${url_proxy_sortant_http}",
+  "https_proxy" => "${url_proxy_sortant_https}",
+  "no_proxy" => "${url_proxy_sortant_no_proxy}"
+}
+EOH
             }
 
             config {
