@@ -119,6 +119,7 @@ gitlab_workhorse['env'] = {
     "http_proxy" => "${url_proxy_sortant_http}",
     "https_proxy" => "${url_proxy_sortant_https}"
     "no_proxy" => "${url_proxy_sortant_no_proxy}"
+}
 EOH
             }
 
