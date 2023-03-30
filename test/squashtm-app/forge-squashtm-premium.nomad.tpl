@@ -85,7 +85,7 @@ EOT
 # Ajout d'une confifguration pour le proxy sortant
             template {
                 data = <<EOH
-JAVA_TOOL_OPTIONS="-Djava.awt.headless=true -Dhttps.proxyHost=test -Dhttps.proxyPort=test -Dhttp.nonProxyHosts=test"
+JAVA_TOOL_OPTIONS="-Djava.awt.headless=true -Dhttps.proxyHost=${url_proxy_sortant_http} -Dhttps.proxyPort=${url_proxy_sortant_https} -Dhttp.nonProxyHosts=${url_proxy_sortant_no_proxy}"
                 EOH
                 destination = "local/java.env"
                 change_mode = "restart"
