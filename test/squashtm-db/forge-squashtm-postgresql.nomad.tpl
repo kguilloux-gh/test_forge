@@ -32,7 +32,7 @@ job "forge-squashtm-postgresql" {
 POSTGRES_DB = {{ with secret "forge/squashtm" }}{{ .Data.data.sqtm_db_name }}{{ end }}
 POSTGRES_USER = {{ with secret "forge/squashtm" }}{{ .Data.data.sqtm_db_username }}{{ end }}
 POSTGRES_PASSWORD = {{ with secret "forge/squashtm" }}{{ .Data.data.sqtm_db_password }}{{ end }}
-                EOH
+EOH
                 destination = "secrets/file.env"
                 change_mode = "restart"
                 env = true
