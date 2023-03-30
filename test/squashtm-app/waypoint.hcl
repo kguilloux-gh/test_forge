@@ -31,6 +31,7 @@ app "forge/squashtm-app" {
             pluginjaxbapi = var.pluginjaxbapi
             pluginjaxbimpl = var.pluginjaxbimpl
             pluginbugtrackerjiracloud = var.pluginbugtrackerjiracloud
+            servernamesquash = var.servernamesquash
             })
         }
     }
@@ -64,4 +65,9 @@ variable "pluginjaxbimpl" {
 variable "pluginbugtrackerjiracloud" {
     type    = string
     default = "plugin.bugtracker.jiracloud-4.0.0.RELEASE.jar"
+}
+
+variable "servernamesquash" {
+     type    = string
+     default = "squash.forge.henix.asipsante.fr"
 }

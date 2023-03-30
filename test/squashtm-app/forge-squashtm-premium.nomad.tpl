@@ -27,6 +27,7 @@ job "forge-squashtm-premium" {
 
         task "squashtm" {
             driver = "docker"
+
             artifact {
                 source = "http://repo.proxy-dev-forge.asip.hst.fluxus.net/artifactory/ext-tools/squash-tm/plugins/Jira_Cloud/${pluginjaxbapi}"
                 options {
@@ -79,6 +80,16 @@ EOH
                 data = <<EOT
 {{ with secret "forge/squashtm" }}{{.Data.data.log4j2}}{{end}}
 EOT
+            }
+
+# Ajout d'une confifguration pour le proxy sortant
+            template {
+                data = <<EOH
+JAVA_TOOL_OPTIONS="-Djava.awt.headless=true -Dhttps.proxyHost=test -Dhttps.proxyPort=test -Dhttp.nonProxyHosts=test"
+                EOH
+                destination = "local/java.env"
+                change_mode = "restart"
+                env = true
             }
 
             config {
@@ -143,7 +154,7 @@ EOT
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = ["urlprefix-squash.forge.henix.asipsante.fr/"]
+                tags = ["urlprefix-${servernamesquash}/"]
                 port = "http"
                 check {
                     name     = "alive"
