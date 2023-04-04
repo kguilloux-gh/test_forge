@@ -34,6 +34,8 @@ app "forge/squashtm-app" {
             servernamesquash = var.servernamesquash
             url_proxy_sortant_http_host = var.url_proxy_sortant_http_host
             url_proxy_sortant_https_host = var.url_proxy_sortant_https_host
+            url_proxy_sortant_http_port = var.url_proxy_sortant_http_port
+            url_proxy_sortant_https_port = var.url_proxy_sortant_https_port
             url_proxy_sortant_no_proxy = var.url_proxy_sortant_no_proxy
             })
         }
