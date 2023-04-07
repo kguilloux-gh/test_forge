@@ -31,6 +31,12 @@ app "forge/squashtm-app" {
             pluginjaxbapi = var.pluginjaxbapi
             pluginjaxbimpl = var.pluginjaxbimpl
             pluginbugtrackerjiracloud = var.pluginbugtrackerjiracloud
+            servernamesquash = var.servernamesquash
+            url_proxy_sortant_http_host = var.url_proxy_sortant_http_host
+            url_proxy_sortant_https_host = var.url_proxy_sortant_https_host
+            url_proxy_sortant_http_port = var.url_proxy_sortant_http_port
+            url_proxy_sortant_https_port = var.url_proxy_sortant_https_port
+            url_proxy_sortant_no_proxy = var.url_proxy_sortant_no_proxy
             })
         }
     }
@@ -64,4 +70,34 @@ variable "pluginjaxbimpl" {
 variable "pluginbugtrackerjiracloud" {
     type    = string
     default = "plugin.bugtracker.jiracloud-4.0.0.RELEASE.jar"
+}
+
+variable "servernamesquash" {
+     type    = string
+     default = "squash.forge.henix.asipsante.fr"
+}
+
+variable "url_proxy_sortant_http_host" {
+    type    = string
+    default = "c-ac-proxy01.asip.hst.fluxus.net"
+}
+
+variable "url_proxy_sortant_https_host" {
+    type    = string
+    default = "c-ac-proxy01.asip.hst.fluxus.net"
+}
+
+variable "url_proxy_sortant_http_port" {
+    type    = string
+    default = "3128"
+}
+
+variable "url_proxy_sortant_https_port" {
+    type    = string
+    default = "3128"
+}
+
+variable "url_proxy_sortant_no_proxy" {
+    type    = string
+    default = "\".asip.hst.fluxus.net|.esante.gouv.fr\""
 }

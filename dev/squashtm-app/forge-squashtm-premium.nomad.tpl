@@ -72,13 +72,23 @@ EOH
             }
 
 # Fichier de configuration log4j2
-      template {
-        change_mode = "restart"
-        destination = "local/log4j2.xml"
-        data = <<EOT
-{{ with secret "forge/squashtm" }}{{.Data.data.log4j2}}{{end}}   
-        EOT
-      }
+            template {
+                change_mode = "restart"
+                destination = "local/log4j2.xml"
+                data = <<EOT
+{{ with secret "forge/squashtm" }}{{.Data.data.log4j2}}{{end}}
+EOT
+            }
+
+# Ajout d'une confifguration pour le proxy sortant
+            template {
+                data = <<EOH
+JAVA_TOOL_OPTIONS="-Djava.awt.headless=true -Dhttps.proxyHost=${url_proxy_sortant_https_host} -Dhttps.proxyPort=${url_proxy_sortant_https_port} -Dhttp.proxyHost=${url_proxy_sortant_http_host} -Dhttp.proxyPort=${url_proxy_sortant_http_port} -Dhttp.nonProxyHosts=${url_proxy_sortant_no_proxy}"
+                EOH
+                destination = "local/java.env"
+                change_mode = "restart"
+                env = true
+            }
 
             config {
                 image   = "${image}:${tag}"
@@ -92,6 +102,7 @@ EOH
                         propagation = "rshared"
                     }
                 }
+# Fichier de configuration log4j2
                 mount {
                     type = "bind"
                     target = "/opt/squash-tm/conf/log4j2.xml"
@@ -137,7 +148,7 @@ EOH
             
             service {
                 name = "$\u007BNOMAD_JOB_NAME\u007D"
-                tags = ["urlprefix-squash.forge.henix.asipsante.fr/"]
+                tags = ["urlprefix-${servernamesquash}/"]
                 port = "http"
                 check {
                     name     = "alive"
