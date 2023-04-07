@@ -165,6 +165,6 @@ JAVA_TOOL_OPTIONS="-Djava.awt.headless=true -Dhttps.proxyHost=${url_proxy_sortan
                     port     = "http"
                 }
             }
-        } 
+        }
     }
 }
