@@ -79,7 +79,7 @@ job "forge-gitlab" {
                 change_mode = "restart"
                 data = <<EOH
 "external_url '${external_url_gitlab_protocole}://${external_url_gitlab_hostname}'
-external_url '${external_url_gitlab_protocole}://test.gitlab'
+external_url "https://test.gitlab.fr"
 {{ with secret "forge/gitlab" }}
 gitlab_rails['initial_root_password'] = '{{ .Data.data.gitlab_root_password }}'
 {{ end }}
