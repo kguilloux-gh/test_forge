@@ -65,14 +65,14 @@ job "forge-gitlab" {
         task "gitlab" {
             driver = "docker"
 
-            template {
-                data = <<EOH
-EXTERNAL_URL="${external_url_gitlab_protocole}://${external_url_gitlab_hostname}"
-EOH
-                destination = "secrets/file.env"
-                change_mode = "restart"
-                env = true
-            }
+#            template {
+#                data = <<EOH
+#EXTERNAL_URL="${external_url_gitlab_protocole}://${external_url_gitlab_hostname}"
+#EOH
+#                destination = "secrets/file.env"
+#                change_mode = "restart"
+#                env = true
+#            }
 
             template {
                 destination = "secrets/gitlab.ans.rb"
