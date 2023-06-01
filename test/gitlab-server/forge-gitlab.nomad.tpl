@@ -78,8 +78,8 @@ EOH
                 destination = "secrets/gitlab.ans.rb"
                 change_mode = "restart"
                 data = <<EOH
-{{ with secret "forge/gitlab" }}
 external_url '${external_url_gitlab_protocole}://${external_url_gitlab_hostname}'
+{{ with secret "forge/gitlab" }}
 gitlab_rails['initial_root_password'] = '{{ .Data.data.gitlab_root_password }}'
 {{ end }}
 gitlab_rails['ldap_enabled'] = true
