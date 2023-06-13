@@ -85,8 +85,6 @@ gitlab_rails['initial_root_password'] = '{{ .Data.data.gitlab_root_password }}'
 gitlab_rails['ldap_enabled'] = true
 gitlab_rails['prevent_ldap_sign_in'] = false
 gitlab_rails['ldap_servers'] = YAML.load <<-'EOS'
-nginx[‘listen_port’] = 80
-nginx[‘listen_https’] = false"
 main:
   label: 'LDAP ANS'
 {{ range service "ldap-forge" }}
@@ -123,6 +121,8 @@ gitlab_workhorse['env'] = {
     "https_proxy" => "${url_proxy_sortant_https}",
     "no_proxy" => "${url_proxy_sortant_no_proxy}"
 }
+nginx[‘listen_port’] = 80
+nginx[‘listen_https’] = false"
 EOH
             }
 
